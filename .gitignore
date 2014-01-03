@@ -1,0 +1,8 @@
+# ignore local packages
+site-lisp
+elpa
+
+
+# ignore local configuration
+auto-save-list
+bookmarks
