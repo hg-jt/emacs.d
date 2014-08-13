@@ -11,7 +11,7 @@
 (show-paren-mode 1)                                    ; highlight matching parens
 (global-font-lock-mode 1)                              ; enable syntax highlighting
 (blink-cursor-mode 0)                                  ; chill the cursor out
-(which-function-mode 1)                                ; show the function name if possible
+(delete-selection-mode 1)                              ; replace selection with typed text
 
 ;; default settings
 (setq-default initial-scratch-message nil              ; disable scratch buffer cruft
@@ -24,6 +24,7 @@
       default-tab-width 4                              ; set tab width to 4
       make-backup-files nil                            ; stop creating backup~ files
       compilation-scroll-output t)                     ; scroll the compilation buffer
+
 
 ;; use utf-8
 (prefer-coding-system 'utf-8)
@@ -48,6 +49,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 ;; configure cc-mode.
 (eval-after-load "cc-mode"
   '(progn
+     (which-function-mode)
      (define-key c-mode-map (kbd "C-c o") 'ff-find-other-file)))
 
 
@@ -93,20 +95,22 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 ;; configure ruby-mode
 (when (locate-library "ruby-mode")
   (setq ruby-indent-level 2
-        auto-mode-alist (append '(("\\.erb$" . ruby-mode)
-                                  ("\\.gemspec" . ruby-mode)
-                                  ("\\.rhtml$" . html-mode)
+        auto-mode-alist (append '(("\\.gemspec" . ruby-mode)
                                   ("\\.irbrc" . ruby-mode)
                                   ("\\.builder" . ruby-mode)
                                   ("Rakefile" . ruby-mode)
                                   ("Gemfile" . ruby-mode)
                                   ("Capfile" . ruby-mode))
-                                auto-mode-alist))
-  (eval-after-load "inf-fuby"
-    '(progn
-       (autoload 'run-ruby "inf-ruby" "Run an inferior Ruby process")
-       (autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")
-       (inf-ruby-keys)) ))
+                                auto-mode-alist)) )
+
+
+;; configure web-mode
+(add-hook 'after-init-hook
+          (lambda ()
+            (when (locate-library "web-mode")
+              (setq auto-mode-alist (append '(("\\.html?\\'" . web-mode)
+                                              ("\\.erb\\'" . web-mode))
+                                            auto-mode-alist)) )))
 
 
 ;; configure js-mode
@@ -119,30 +123,27 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 
 
 ;; configure inferior-js-mode
-(eval-after-load "js-comint"
-  '(progn
-     (defun js-send-last-defun ()
-       "Send the previous defun to the inferior Javascript process."
-       (interactive)
-       (js-send-region (save-excursion (beginning-of-defun) (point)) (point)))
+(add-hook 'after-init-hook
+          (lambda ()
+            (when (locate-library "js-comint")
+              (defun js-send-last-defun ()
+                "Send the previous defun to the inferior Javascript process."
+                (interactive)
+                (js-send-region (save-excursion (beginning-of-defun) (point)) (point)))
 
-     (defun inferior-js-keybindings ()
-       (define-key js-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
-       (define-key js-mode-map (kbd "C-x C-E") 'js-send-last-defun)
-       (define-key js-mode-map (kbd "C-M-x") 'js-send-last-sexp-and-go)
-       (define-key js-mode-map (kbd "C-c b") 'js-send-buffer)
-       (define-key js-mode-map (kbd "C-c C-b") 'js-send-buffer-and-go)
-       (define-key js-mode-map (kbd "C-c l") 'js-load-file-and-go))
+              (defun inferior-js-keybindings ()
+                (define-key js-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
+                (define-key js-mode-map (kbd "C-x C-E") 'js-send-last-defun)
+                (define-key js-mode-map (kbd "C-M-x") 'js-send-last-sexp-and-go)
+                (define-key js-mode-map (kbd "C-c b") 'js-send-buffer)
+                (define-key js-mode-map (kbd "C-c C-b") 'js-send-buffer-and-go)
+                (define-key js-mode-map (kbd "C-c l") 'js-load-file-and-go))
 
-     (add-hook 'inferior-js-mode-hook 'inferior-js-keybindings) ))
+              (add-hook 'inferior-js-mode-hook 'inferior-js-keybindings) )))
 
 
 ;; configure latex-mode
 (add-to-list 'auto-mode-alist '("\\.latex\\'" . latex-mode))
-
-
-;; misc. minor-modes
-(delete-selection-mode 1)
 
 
 ;; configure key bindings
@@ -158,13 +159,9 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
   (define-key global-map [end] 'end-of-line))
 
 
-(add-hook 'after-init-hook
+;; configure markdown-mode
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-hook 'markdown-mode-hook
           (lambda ()
-            ;; configure markdown-mode
-            (when (locate-library "markdown-mode")
-              (autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
-              (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-              (add-hook 'markdown-mode-hook
-                        (lambda ()
-                          (set-fill-column 80)
-                          (turn-on-auto-fill))) )))
+            (set-fill-column 80)
+            (turn-on-auto-fill)))
