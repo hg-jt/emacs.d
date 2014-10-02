@@ -1,22 +1,21 @@
-.emacs.d
-========
+# .emacs.d
 
 Emacs configuration.
 
 
-Installing
-----------
+## Installing
 
 1. Clone this repository to `~/.emacs.d`.
 2. Install external packages: `emacs -batch -l install.el`
 
-Extending
----------
+
+## Extending
 
 This repository is configured to ignore everything in `./site-lisp` and
 `./elpa`. This means that you can install packages using elpa or by copying the
 elisp files into `./site-lisp` (which has been configued to be on the
 load-path). All local configuration should go in `site-lisp/default.el`.
+
 
 ### Local Customization Example (`site-lisp/default.el`)
 

@@ -146,6 +146,15 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 (add-to-list 'auto-mode-alist '("\\.latex\\'" . latex-mode))
 
 
+;; configure multi-term
+(when (locate-library "mutli-term")
+  (add-hook 'term-mode-hook
+            (lambda ()
+              (setq term-buffer-maximum-size 10000) 
+              (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
+              (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next)) )))
+
+
 ;; configure key bindings
 (define-key global-map [f5] 'compile)                  ; compile
 (define-key global-map [f7] 'kill-compilation)         ; close compile frame
