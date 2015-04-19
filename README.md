@@ -21,8 +21,7 @@ load-path). All local configuration should go in `site-lisp/default.el`.
 
 ```elisp
 (setq user-mail-address "user@example.com"
-      user-full-name "Your Name"
-      compile-command "ant -emacs")
+      user-full-name "Your Name")
 
 (when window-system
   (load-theme 'wombat t)
