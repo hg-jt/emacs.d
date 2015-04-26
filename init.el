@@ -104,6 +104,12 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                                 auto-mode-alist)) )
 
 
+;; configure python.el
+(when (locate-library "python")
+  (setq auto-mode-alist (append '(("\\.pythonrc" . python-mode))
+                                auto-mode-alist)) )
+
+
 ;; configure web-mode
 (add-hook 'after-init-hook
           (lambda ()
