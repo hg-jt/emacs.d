@@ -109,7 +109,10 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
           (lambda ()
             (when (locate-library "web-mode")
               (setq auto-mode-alist (append '(("\\.html?\\'" . web-mode)
-                                              ("\\.erb\\'" . web-mode))
+                                              ("\\.erb\\'" . web-mode)
+                                              ("\\.rhtml\\'" . web-mode)
+                                              ("\\.j2\\'" . web-mode)
+                                              ("\\.jsp\\'" . web-mode))
                                             auto-mode-alist)) )))
 
 
