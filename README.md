@@ -20,9 +20,11 @@ load-path). All local configuration should go in `site-lisp/default.el`.
 ### Local Customization Example (`site-lisp/default.el`)
 
 ```elisp
+;;; default.el --- Local Emacs customizations.
 (setq user-mail-address "user@example.com"
       user-full-name "Your Name")
 
+;; look & feel
 (when window-system
   (load-theme 'wombat t)
 

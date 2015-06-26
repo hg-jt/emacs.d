@@ -1,8 +1,14 @@
-# ignore local packages
+# .gitignore --- Configures files to ignore from this Git repository.
+
+# Local packages
 site-lisp
 elpa
 
 
-# ignore local configuration
+# Local configuration
 auto-save-list
 bookmarks
+
+
+# Generated files
+*.dat

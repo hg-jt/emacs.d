@@ -49,7 +49,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 ;; configure cc-mode.
 (eval-after-load "cc-mode"
   '(progn
-     (which-function-mode)
+     ;(which-function-mode)
      (define-key c-mode-map (kbd "C-c o") 'ff-find-other-file)))
 
 
@@ -65,17 +65,17 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
            org-src-fontify-natively t)                 ; makes code blocks pretty
 
      ;; configure org export
-     (setq org-export-ascii-underline
-           '(?\- ?\= ?\~ ?\# ?^ ?\$)                   ; configure ascii export underlines
-           org-export-latex-listings t)                ; use the listings package in LaTeX export
+     (setq org-export-ascii-underline '(?\- ?\= ?\~ ?\# ?^ ?\$)  ; configure ascii export underlines
+           org-export-latex-listings t)                          ; use the listings package in LaTeX export
 
      ;; configure capture templates
      (setq org-capture-templates
-           '(("j" "Journal" entry (file+datetree "~/notes/journal.org")
-              "* %?")))
+           '(("j" "Journal" entry (file+datetree "~/notes/journal.org") "* %?")))
 
+     (setq org-todo-keywords
+       '((sequence "TODO" "IN PROGRESS" "|" "DONE")))
      ;; configure org export (ox)
-     (require 'ox-beamer)
+     ;(require 'ox-beamer)
 
      (defun org-summary-todo (n-done n-not-done)
        "Switch entry to DONE when all subentries are done, to TODO otherwise."
@@ -103,11 +103,24 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                                   ("Capfile" . ruby-mode))
                                 auto-mode-alist)) )
 
+;; configure yaml-mode
+(when (locate-library "yaml-mode")
+  (setq auto-mode-alist (append '(("\\.yml$" . yaml-mode)
+                                  ("\\.yaml" . yaml-mode))
+                                auto-mode-alist)) )
+
 
 ;; configure python.el
 (when (locate-library "python")
   (setq auto-mode-alist (append '(("\\.pythonrc" . python-mode))
                                 auto-mode-alist)) )
+
+
+;; configure shell-mode
+(add-hook 'sh-mode-hook
+          (lambda ()
+            (setq sh-basic-offset 2
+                  sh-indentation 2)))
 
 
 ;; configure web-mode
