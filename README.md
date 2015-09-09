@@ -24,6 +24,7 @@ load-path). All local configuration should go in `site-lisp/default.el`.
 (setq user-mail-address "user@example.com"
       user-full-name "Your Name")
 
+
 ;; look & feel
 (when window-system
   (load-theme 'wombat t)
@@ -32,14 +33,19 @@ load-path). All local configuration should go in `site-lisp/default.el`.
   (setq default-frame-alist
         '((wait-for-wm . nil)
           (height . 45)
-          (width . 120))))
+          (width . 120)
+          (cursor-color . "Lime Green")))
 
-;; manage the PATH environment variable
+  ;; custom font
+  (when (eq system-type 'darwin)
+    (set-face-attribute 'default nil :family "Source Code Pro")
+    (set-face-attribute 'default nil :height 140)) )
+
+
+;; configure PATH environment variable for external processes
 (setenv "PATH"
-        (concat
-         "/usr/texbin" ":"
-         "/usr/local/bin" ":"
-         (getenv "PATH")))
+        (concat "/usr/texbin" ":" "/usr/local/bin" ":" (getenv "PATH")))
+
 
 ;; add common OS-X third-party bin directories to exec-path
 (setq exec-path

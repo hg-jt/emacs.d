@@ -4,6 +4,7 @@
 (unless (eq system-type 'darwin)
   (if (fboundp 'menu-bar-mode) (menu-bar-mode 0)))     ; show menu-bar on OS-X only
 (if (fboundp 'tool-bar-mode) (tool-bar-mode 0))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
 (if (fboundp 'mouse-wheel-mode) (mouse-wheel-mode 1))
 
 (line-number-mode 1)                                   ; show line numbers in mode bar
@@ -101,12 +102,6 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                                   ("Rakefile" . ruby-mode)
                                   ("Gemfile" . ruby-mode)
                                   ("Capfile" . ruby-mode))
-                                auto-mode-alist)) )
-
-;; configure yaml-mode
-(when (locate-library "yaml-mode")
-  (setq auto-mode-alist (append '(("\\.yml$" . yaml-mode)
-                                  ("\\.yaml" . yaml-mode))
                                 auto-mode-alist)) )
 
 
