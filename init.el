@@ -191,3 +191,10 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
           (lambda ()
             (set-fill-column 80)
             (turn-on-auto-fill)))
+
+
+;; configure scala-mode
+(add-hook 'scala-mode-hook
+          (lambda ()
+            (when (>= emacs-major-version 24)
+              (electric-pair-mode 1))))

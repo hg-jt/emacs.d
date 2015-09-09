@@ -16,7 +16,7 @@
              '("melpa" . "http://melpa.org/packages/") t)
 
 (defvar my-packages
-  '(org markdown-mode inf-ruby yaml-mode yasnippet rainbow-mode js-comint auto-complete web-mode magit)
+  '(org markdown-mode inf-ruby yaml-mode yasnippet rainbow-mode js-comint auto-complete web-mode magit scala-mode2)
   "A list of packages to install.")
 
 (package-refresh-contents)    ; updates packages lists
