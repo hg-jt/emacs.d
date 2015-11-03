@@ -1,6 +1,7 @@
 # .emacs.d
 
-Emacs configuration.
+Emacs configuration that attempts to be backwards compatible w/stock Emacs
+installations on OS X, Debian (Squeeze), and RHEL 5.5.
 
 
 ## Installing
@@ -11,16 +12,17 @@ Emacs configuration.
 
 ## Extending
 
-This repository is configured to ignore everything in `./site-lisp` and
-`./elpa`. This means that you can install packages using elpa or by copying the
-elisp files into `./site-lisp` (which has been configued to be on the
-load-path). All local configuration should go in `site-lisp/default.el`.
+This repository is configured to exclude everything in `./site-lisp` and
+`./elpa` from source contorl. This means that you can install packages using
+elpa or by copying the elisp files into `./site-lisp` (which has been configued
+to be on the load-path). All local configuration should go in
+`site-lisp/default.el`.
 
 
-### Local Customization Example (`site-lisp/default.el`)
+### Local Customization Example
 
 ```elisp
-;;; default.el --- Local Emacs customizations.
+;;; site-lisp/default.el --- Local Emacs customizations.
 (setq user-mail-address "user@example.com"
       user-full-name "Your Name")
 
@@ -29,25 +31,25 @@ load-path). All local configuration should go in `site-lisp/default.el`.
 (when window-system
   (load-theme 'wombat t)
 
-  ;; set the window size
+  ;; custom font
+  (set-face-attribute 'default nil :family "Source Code Pro")
+  (set-face-attribute 'default nil :height 140)
+
+  ;; set the window size & cursor color
   (setq default-frame-alist
         '((wait-for-wm . nil)
           (height . 45)
           (width . 120)
-          (cursor-color . "Lime Green")))
-
-  ;; custom font
-  (when (eq system-type 'darwin)
-    (set-face-attribute 'default nil :family "Source Code Pro")
-    (set-face-attribute 'default nil :height 140)) )
+          (cursor-color . "Red"))) )
 
 
-;; configure PATH environment variable for external processes
-(setenv "PATH"
-        (concat "/usr/texbin" ":" "/usr/local/bin" ":" (getenv "PATH")))
+;; OS-X specific customizations
+(when (eq system-type 'darwin)
+  ;; configure path for external processes
+  (setenv "PATH"
+          (concat "/usr/texbin" ":" "/opt/local/bin" ":" "/usr/local/bin" ":" (getenv "PATH")))
 
-
-;; add common OS-X third-party bin directories to exec-path
-(setq exec-path
-      (append exec-path '("/usr/texbin" "/opt/local/bin" "/usr/local/bin")))
+  ;; configure path for subprocesses
+  (setq exec-path
+        (append exec-path '("/usr/texbin" "/opt/local/bin" "/usr/local/bin"))) )
 ```

@@ -19,7 +19,6 @@
               indent-tabs-mode nil                     ; use spaces instead of tabs
               indicate-empty-lines t)                  ; indicates an empty line in the fringe
 
-
 ;; general configuration
 (setq inhibit-startup-message t                        ; disable startup messages
       default-tab-width 4                              ; set tab width to 4
@@ -32,6 +31,18 @@
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
+
+
+;; configure global key bindings
+(define-key global-map [f5] 'compile)                  ; compile
+(define-key global-map [f7] 'kill-compilation)         ; close compile frame
+
+
+;; configure OS X specific keybindings
+(when (eq system-type 'darwin)
+  ;; fix home and end keys from a pc keyboard's 3x2 cluster
+  (define-key global-map [home] 'beginning-of-line)
+  (define-key global-map [end] 'end-of-line))
 
 
 ;; configure load-path
@@ -47,7 +58,12 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 (add-subdirs-to-load-path "~/.emacs.d/site-lisp")
 
 
-;; configure cc-mode.
+;; configure sh-mode
+(setq-default sh-basic-offset 2
+              sh-indentation 2)
+
+
+;; configure cc-mode
 (eval-after-load "cc-mode"
   '(progn
      ;(which-function-mode)
@@ -73,8 +89,12 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
      (setq org-capture-templates
            '(("j" "Journal" entry (file+datetree "~/notes/journal.org") "* %?")))
 
+     ;; define TODO task workflow
      (setq org-todo-keywords
-       '((sequence "TODO" "IN PROGRESS" "|" "DONE")))
+           '((sequence "TODO" "IN PROGRESS" "|" "DONE")))
+
+     ;; configure keybindings
+     (define-key global-map (kbd "C-c c") 'org-capture)     ; capture
      ;; configure org export (ox)
      ;(require 'ox-beamer)
 
@@ -95,8 +115,8 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 
 ;; configure ruby-mode
 (when (locate-library "ruby-mode")
-  (setq ruby-indent-level 2
-        auto-mode-alist (append '(("\\.gemspec" . ruby-mode)
+  (setq-default ruby-indent-level 2)
+  (setq auto-mode-alist (append '(("\\.gemspec" . ruby-mode)
                                   ("\\.irbrc" . ruby-mode)
                                   ("\\.builder" . ruby-mode)
                                   ("Rakefile" . ruby-mode)
@@ -107,37 +127,28 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 
 ;; configure python.el
 (when (locate-library "python")
-  (setq auto-mode-alist (append '(("\\.pythonrc" . python-mode))
-                                auto-mode-alist)) )
+  (setq auto-mode-alist (append '(("\\.pythonrc\\'" . python-mode)) auto-mode-alist)))
 
 
-;; configure shell-mode
-(add-hook 'sh-mode-hook
-          (lambda ()
-            (setq sh-basic-offset 2
-                  sh-indentation 2)))
+;; configure js-mode
+(setq-default js-indent-level 2)
+
+
+;; configure latex-mode
+(add-to-list 'auto-mode-alist '("\\.latex\\'" . latex-mode))
 
 
 ;; configure web-mode
 (add-hook 'after-init-hook
           (lambda ()
             (when (locate-library "web-mode")
-              (setq web-mode-markup-indent-offset 2
-                    auto-mode-alist (append '(("\\.html?\\'" . web-mode)
+              (setq-default web-mode-markup-indent-offset 2)
+              (setq auto-mode-alist (append '(("\\.html?\\'" . web-mode)
                                               ("\\.erb\\'" . web-mode)
                                               ("\\.rhtml\\'" . web-mode)
                                               ("\\.j2\\'" . web-mode)
                                               ("\\.jsp\\'" . web-mode))
-                                            auto-mode-alist)) )))
-
-
-;; configure js-mode
-(add-hook 'js-mode-hook
-          (lambda ()
-            (if (and (stringp buffer-file-name)
-                     (string-match "\\.json\\'" buffer-file-name))
-                  (setq js-indent-level 2)
-              (setq js-indent-level 2))))
+                                            auto-mode-alist))) ))
 
 
 ;; configure inferior-js-mode
@@ -160,34 +171,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
               (add-hook 'inferior-js-mode-hook 'inferior-js-keybindings) )))
 
 
-;; configure latex-mode
-(add-to-list 'auto-mode-alist '("\\.latex\\'" . latex-mode))
-
-
-;; configure multi-term
-(when (locate-library "mutli-term")
-  (add-hook 'term-mode-hook
-            (lambda ()
-              (setq term-buffer-maximum-size 10000) 
-              (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
-              (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next)) )))
-
-
-;; configure key bindings
-(define-key global-map [f5] 'compile)                  ; compile
-(define-key global-map [f7] 'kill-compilation)         ; close compile frame
-(define-key global-map (kbd "C-c c") 'org-capture)     ; capture
-
-
-;; configure OS X specific keybindings
-(when (eq system-type 'darwin)
-  ;; fix home and end keys from a pc keyboard's 3x2 cluster
-  (define-key global-map [home] 'beginning-of-line)
-  (define-key global-map [end] 'end-of-line))
-
-
 ;; configure markdown-mode
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-hook 'markdown-mode-hook
           (lambda ()
             (set-fill-column 80)

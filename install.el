@@ -7,7 +7,7 @@
 ;; The following list of packages may be interesting, but are not currently
 ;; included:
 ;;
-;;    erlang, multi-term
+;;    erlang, multi-term, rainbow-delimiters, paredit
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives
@@ -16,10 +16,24 @@
              '("melpa" . "http://melpa.org/packages/") t)
 
 (defvar my-packages
-  '(org markdown-mode inf-ruby yaml-mode yasnippet rainbow-mode js-comint auto-complete web-mode magit scala-mode2)
+  '(
+    org
+    markdown-mode
+    inf-ruby
+    yaml-mode
+    yasnippet
+    rainbow-mode
+    js-comint
+    auto-complete
+    web-mode
+    magit
+    scala-mode2
+    clojure-mode
+    clojure-mode-extra-font-locking
+    cider)
   "A list of packages to install.")
 
-(package-refresh-contents)    ; updates packages lists
+(package-refresh-contents)    ; updates package lists
 
 (dolist (p my-packages)
   (condition-case nil
