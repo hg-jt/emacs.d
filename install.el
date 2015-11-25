@@ -7,13 +7,14 @@
 ;; The following list of packages may be interesting, but are not currently
 ;; included:
 ;;
-;;    erlang, multi-term, rainbow-delimiters, paredit
+;;    erlang, multi-term, rainbow-delimiters, paredit, exec-path-from-shell
 (require 'package)
 (package-initialize)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ;("melpa" . "http://melpa.org/packages/")
+                         ("melpa-stable". "https://stable.melpa.org/packages/")))
 
 (defvar my-packages
   '(
@@ -30,7 +31,10 @@
     scala-mode2
     clojure-mode
     clojure-mode-extra-font-locking
-    cider)
+    cider
+    dockerfile-mode
+    less-css-mode
+    jade-mode)
   "A list of packages to install.")
 
 (package-refresh-contents)    ; updates package lists
