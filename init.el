@@ -58,6 +58,12 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 (add-subdirs-to-load-path "~/.emacs.d/site-lisp")
 
 
+;; initialize ELPA for older emacsen
+(when (and (< emacs-major-version 24) (locate-library "package"))
+  (require 'package)
+  (package-initialize))
+
+
 ;; configure sh-mode
 (setq-default sh-basic-offset 2
               sh-indentation 2)
