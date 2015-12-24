@@ -24,7 +24,7 @@
   ;; package repositories for modern emacsen
   (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                            ("marmalade" . "https://marmalade-repo.org/packages/")
-                           ("melpa" . "http://melpa.org/packages/")
+                           ("melpa" . "https://melpa.org/packages/")
                            ("melpa-stable". "https://stable.melpa.org/packages/"))) )
 
 
@@ -37,23 +37,34 @@
 
 
 (defvar my-packages
-  '(org
+  '(;; misc. languages
+    dockerfile-mode
+    jade-mode
+    less-css-mode
     markdown-mode
-    inf-ruby
-    yaml-mode
-    yasnippet
-    rainbow-mode
-    js-comint
-    auto-complete
-    web-mode
-    magit
     scala-mode2
+    web-mode
+    yaml-mode
+
+    ;; clojure
     clojure-mode
     clojure-mode-extra-font-locking
     cider
-    dockerfile-mode
-    less-css-mode
-    jade-mode)
+
+    ;; org-mode
+    org
+    ox-reveal
+
+    ;; ext. tools
+    inf-ruby
+    js-comint
+    magit
+
+    ;; extras
+    auto-complete
+    rainbow-mode
+    restclient
+    yasnippet)
   "A list of packages to install.")
 
 

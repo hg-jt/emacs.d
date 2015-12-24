@@ -16,6 +16,7 @@ be omitted.
 ### Installing w/Emacs 24 or newer
 
 1. Clone this repository to `~/.emacs.d`
+
 2. Install external packages: `emacs -batch -l install.el`
 
 
@@ -45,24 +46,27 @@ to be on the load-path). All local configuration should go in
 
 ```elisp
 ;;; site-lisp/default.el --- Local Emacs customizations.
-(setq user-mail-address "user@example.com"
-      user-full-name "Your Name")
-
 
 ;; look & feel
 (when window-system
-  (load-theme 'wombat t)
+  ;; set the window size & cursor color
+  (setq default-frame-alist
+        '((wait-for-wm . nil)
+          (height . 45)
+          (width . 140)
+          (cursor-color . "Red"))
+        split-width-threshold 140)
 
   ;; custom font
   (set-face-attribute 'default nil :family "Source Code Pro")
   (set-face-attribute 'default nil :height 140)
 
-  ;; set the window size & cursor color
-  (setq default-frame-alist
-        '((wait-for-wm . nil)
-          (height . 45)
-          (width . 120)
-          (cursor-color . "Red"))) )
+  ;; set the theme
+  (load-theme 'wombat t))
+
+;; personalization
+(setq user-mail-address "user@example.com"
+      user-full-name "Your Name")
 
 
 ;; OS-X specific customizations
