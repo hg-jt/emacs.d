@@ -1,7 +1,7 @@
 ;;; init.el --- Emacs configuration
 
 ;; UI
-(unless (eq system-type 'darwin)
+(unless (and (eq system-type 'darwin) (window-system))
   (if (fboundp 'menu-bar-mode) (menu-bar-mode 0)))     ; show menu-bar on OS-X only
 (if (fboundp 'tool-bar-mode) (tool-bar-mode 0))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
@@ -17,7 +17,13 @@
 ;; default settings
 (setq-default initial-scratch-message nil              ; disable scratch buffer cruft
               indent-tabs-mode nil                     ; use spaces instead of tabs
-              indicate-empty-lines t)                  ; indicates an empty line in the fringe
+              indicate-empty-lines t                   ; indicates an empty line in the fringe
+              major-mode (lambda ()                    ; use auto-modes for non-file buffers
+                           (if buffer-file-name
+                               'fundamental-mode
+                             (let ((buffer-file-name (buffer-name)))
+                               (set-auto-mode)))) )
+
 
 ;; general configuration
 (setq inhibit-startup-message t                        ; disable startup messages
