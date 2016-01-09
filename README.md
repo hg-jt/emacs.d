@@ -79,3 +79,18 @@ to be on the load-path). All local configuration should go in
   (setq exec-path
         (append exec-path '("/usr/texbin" "/opt/local/bin" "/usr/local/bin"))) )
 ```
+
+
+## Special Considerations
+
+### Using Flycheck w/Python
+
+The configuration for using Flycheck w/Python makes a few assumptions, most
+notably that you are using virtualenv and that you have defined a project-level
+variable called `project-venv-name`. You can define this variable in a file
+at the root of your project called `.dir-locals.el`. For example:
+
+```elisp
+;;; .dir-locals.el --- Project configuration.
+((python-mode . ((project-venv-name . "project-x"))))
+```

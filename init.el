@@ -97,7 +97,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 
      ;; define TODO task workflow
      (setq org-todo-keywords
-           '((sequence "TODO" "IN PROGRESS" "|" "DONE")))
+           '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")))
 
      ;; configure keybindings
      (define-key global-map (kbd "C-c c") 'org-capture)     ; capture
@@ -133,7 +133,27 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 
 ;; configure python.el
 (when (locate-library "python")
-  (setq auto-mode-alist (append '(("\\.pythonrc\\'" . python-mode)) auto-mode-alist)))
+  (setq auto-mode-alist (append '(("\\.pythonrc\\'" . python-mode)) auto-mode-alist))
+
+  ;; declare 'project-venv-name' as safe variable when defined
+  ;; as a string in .dir-locals.el or as a file local variable.
+  (put 'project-venv-name 'safe-local-variable #'stringp)
+
+  ;; initialize pylint via virtualenv and flycheck
+  ;; @see https://github.com/porterjamesj/virtualenvwrapper.el
+  (add-hook 'after-init-hook
+            (lambda ()
+              (when (locate-library "flycheck")
+                (add-hook 'python-mode-hook (lambda ()
+                                              ;; attempt to use virtualenvwrapper.el
+                                              (hack-local-variables)
+                                              (when (and
+                                                     (locate-library "virtualenvwrapper")
+                                                     (boundp 'project-venv-name))
+                                                (venv-workon project-venv-name))
+
+                                              ;; enable flycheck
+                                              (global-flycheck-mode))) ))) )
 
 
 ;; configure js-mode

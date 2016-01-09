@@ -62,6 +62,7 @@
 
     ;; extras
     auto-complete
+    flycheck
     rainbow-mode
     restclient
     yasnippet)
