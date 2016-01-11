@@ -29,8 +29,8 @@
 (setq inhibit-startup-message t                        ; disable startup messages
       default-tab-width 4                              ; set tab width to 4
       make-backup-files nil                            ; stop creating backup~ files
-      compilation-scroll-output t)                     ; scroll the compilation buffer
-
+      compilation-scroll-output t                      ; scroll the compilation buffer
+      gc-cons-threshold 10000000)                      ; increase threshold for running gc
 
 ;; use utf-8
 (prefer-coding-system 'utf-8)
@@ -128,12 +128,10 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 ;; configure ruby-mode
 (when (locate-library "ruby-mode")
   (setq-default ruby-indent-level 2)
-  (setq auto-mode-alist (append '(("\\.gemspec" . ruby-mode)
-                                  ("\\.irbrc" . ruby-mode)
-                                  ("\\.builder" . ruby-mode)
-                                  ("Rakefile" . ruby-mode)
-                                  ("Gemfile" . ruby-mode)
-                                  ("Capfile" . ruby-mode))
+  (setq auto-mode-alist (append '(("\\.gemspec\\'" . ruby-mode)
+                                  ("\\.irbrc\\'" . ruby-mode)
+                                  ("\\.builder\\'" . ruby-mode)
+                                  ("\\(?:Rake\\|Cap\\|Vagrant\\)file\\'" . ruby-mode))
                                 auto-mode-alist)) )
 
 
@@ -170,22 +168,19 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 (add-to-list 'auto-mode-alist '("\\.latex\\'" . latex-mode))
 
 
-;; configure web-mode
+;; configure packages most likely installed through the package manager
 (add-hook 'after-init-hook
           (lambda ()
+            ;; configure web-mode
             (when (locate-library "web-mode")
               (setq-default web-mode-markup-indent-offset 2)
-              (setq auto-mode-alist (append '(("\\.html?\\'" . web-mode)
+              (setq auto-mode-alist (append '(("\\.r?html?\\'" . web-mode)
                                               ("\\.erb\\'" . web-mode)
-                                              ("\\.rhtml\\'" . web-mode)
                                               ("\\.j2\\'" . web-mode)
                                               ("\\.jsp\\'" . web-mode))
-                                            auto-mode-alist))) ))
+                                            auto-mode-alist)))
 
-
-;; configure inferior-js-mode
-(add-hook 'after-init-hook
-          (lambda ()
+            ;; configure inferior-js-mode
             (when (locate-library "js-comint")
               (defun js-send-last-defun ()
                 "Send the previous defun to the inferior Javascript process."
@@ -200,7 +195,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                 (define-key js-mode-map (kbd "C-c C-b") 'js-send-buffer-and-go)
                 (define-key js-mode-map (kbd "C-c l") 'js-load-file-and-go))
 
-              (add-hook 'inferior-js-mode-hook 'inferior-js-keybindings) )))
+              (add-hook 'inferior-js-mode-hook 'inferior-js-keybindings)) ))
 
 
 ;; configure markdown-mode
