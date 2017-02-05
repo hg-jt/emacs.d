@@ -8,7 +8,10 @@ elpa
 # Local configuration
 auto-save-list
 bookmarks
+custom.el
 
 
 # Generated files
+network-security.data
+url
 *.dat

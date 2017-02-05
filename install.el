@@ -65,6 +65,7 @@
     flycheck
     rainbow-mode
     restclient
+    uuid
     yasnippet)
   "A list of packages to install.")
 

@@ -30,7 +30,8 @@
       default-tab-width 4                              ; set tab width to 4
       make-backup-files nil                            ; stop creating backup~ files
       compilation-scroll-output t                      ; scroll the compilation buffer
-      gc-cons-threshold 10000000)                      ; increase threshold for running gc
+      gc-cons-threshold 10000000                       ; increase threshold for running gc
+      custom-file "~/.emacs.d/custom.el")              ; isolate customizations
 
 ;; use utf-8
 (prefer-coding-system 'utf-8)
@@ -154,10 +155,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                                               (when (and
                                                      (locate-library "virtualenvwrapper")
                                                      (boundp 'project-venv-name))
-                                                (venv-workon project-venv-name))
-
-                                              ;; enable flycheck
-                                              (global-flycheck-mode))) ))) )
+                                                (venv-workon project-venv-name)))) ))) )
 
 
 ;; configure js-mode
@@ -201,8 +199,8 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 ;; configure markdown-mode
 (add-hook 'markdown-mode-hook
           (lambda ()
-            (set-fill-column 80)
-            (turn-on-auto-fill)))
+            (set-fill-column 80) ))
+            ;(turn-on-auto-fill)))
 
 
 ;; configure scala-mode
