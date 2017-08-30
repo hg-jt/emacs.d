@@ -13,5 +13,6 @@ custom.el
 
 # Generated files
 network-security.data
+tramp
 url
 *.dat

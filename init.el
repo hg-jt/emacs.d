@@ -43,6 +43,7 @@
 ;; configure global key bindings
 (define-key global-map [f5] 'compile)                  ; compile
 (define-key global-map [f7] 'kill-compilation)         ; close compile frame
+(define-key global-map (kbd "C-c c") 'org-capture)     ; org-capture
 
 
 ;; configure OS X specific keybindings
@@ -98,16 +99,10 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
      (setq org-export-ascii-underline '(?\- ?\= ?\~ ?\# ?^ ?\$)  ; configure ascii export underlines
            org-export-latex-listings t)                          ; use the listings package in LaTeX export
 
-     ;; configure capture templates
-     (setq org-capture-templates
-           '(("j" "Journal" entry (file+datetree "~/notes/journal.org") "* %?")))
-
      ;; define TODO task workflow
      (setq org-todo-keywords
            '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")))
 
-     ;; configure keybindings
-     (define-key global-map (kbd "C-c c") 'org-capture)     ; capture
      ;; configure org export (ox)
      ;(require 'ox-beamer)
 
@@ -120,7 +115,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
      (add-hook 'org-mode-hook
                (lambda ()
                  ;; configure editing preferences
-                 (setq fill-column 100
+                 (setq fill-column 80
                        sentence-end-double-space nil)
                  (turn-on-auto-fill))
                t)))
