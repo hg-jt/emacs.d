@@ -23,7 +23,8 @@
     (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   ;; package repositories for modern emacsen
   (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                           ("marmalade" . "https://marmalade-repo.org/packages/")
+                           ;("marmalade" . "https://marmalade-repo.org/packages/")
+                           ("org" . "https://orgmode.org/elpa/")
                            ("melpa" . "https://melpa.org/packages/")
                            ("melpa-stable" . "https://stable.melpa.org/packages/"))) )
 
@@ -39,7 +40,7 @@
     yaml-mode
 
     ;; org-mode
-    org
+    org-with-contrib
     ox-reveal
 
     ;; ext. tools
