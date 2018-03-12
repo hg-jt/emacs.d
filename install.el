@@ -25,15 +25,7 @@
   (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                            ("marmalade" . "https://marmalade-repo.org/packages/")
                            ("melpa" . "https://melpa.org/packages/")
-                           ("melpa-stable". "https://stable.melpa.org/packages/"))) )
-
-
-;; pin stable versions of cider/clojure-mode when possible
-(when (boundp 'package-pinned-packages)
-  (setq package-pinned-packages
-        '((clojure-mode . "melpa-stable")
-          (clojure-mode-extra-font-locking . "melpa-stable")
-          (cider . "melpa-stable"))) )
+                           ("melpa-stable" . "https://stable.melpa.org/packages/"))) )
 
 
 (defvar my-packages
@@ -45,11 +37,6 @@
     scala-mode2
     web-mode
     yaml-mode
-
-    ;; clojure
-    clojure-mode
-    clojure-mode-extra-font-locking
-    cider
 
     ;; org-mode
     org
