@@ -48,6 +48,9 @@
 
 ;; configure OS X specific keybindings
 (when (eq system-type 'darwin)
+  ;; works around terminal issues w/properly sending meta in OSX
+  (define-key global-map [f8] 'query-replace-regexp)
+
   ;; fix home and end keys from a pc keyboard's 3x2 cluster
   (define-key global-map [home] 'beginning-of-line)
   (define-key global-map [end] 'end-of-line))
@@ -93,23 +96,21 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
            org-odd-levels-only t                       ; skip levels for readability
            org-log-done t                              ; adds a timestamp to completed tasks
            org-alphabetical-lists t                    ; enable single character alpha bullets
-           org-src-fontify-natively t)                 ; makes code blocks pretty
+           org-src-fontify-natively t                  ; makes code blocks pretty
 
-     ;; configure org export
-     (setq org-export-ascii-underline '(?\- ?\= ?\~ ?\# ?^ ?\$)  ; configure ascii export underlines
-           org-export-latex-listings t)                          ; use the listings package in LaTeX export
+           ;; configure org export
+           org-export-ascii-underline '(?\- ?\= ?\~ ?\# ?^ ?\$)  ; configure ascii export underlines
+           org-latex-listings t                                  ; use the listings package in LaTeX export
 
-     ;; define TODO task workflow
-     (setq org-todo-keywords
-           '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")))
+           ;; define TODO task workflow
+           org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")))
 
-     ;; configure org export (ox)
-     ;(require 'ox-beamer)
 
      (defun org-summary-todo (n-done n-not-done)
        "Switch entry to DONE when all subentries are done, to TODO otherwise."
        (let (org-log-done org-log-states)   ; turn off logging
          (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
 
      (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
      (add-hook 'org-mode-hook
@@ -118,7 +119,9 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                  (setq fill-column 80
                        sentence-end-double-space nil)
                  (turn-on-auto-fill))
-               t)))
+               t)
+
+     (add-to-list 'auto-mode-alist '("\\*org\\*\\'" . org-mode)) ))
 
 
 ;; configure ruby-mode
