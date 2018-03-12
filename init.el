@@ -188,7 +188,23 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                 (define-key js-mode-map (kbd "C-c C-b") 'js-send-buffer-and-go)
                 (define-key js-mode-map (kbd "C-c l") 'js-load-file-and-go))
 
-              (add-hook 'inferior-js-mode-hook 'inferior-js-keybindings)) ))
+              (add-hook 'inferior-js-mode-hook 'inferior-js-keybindings))
+
+            ;; configure magit
+            (when (locate-library "magit")
+              (global-set-key (kbd "C-x g") 'magit-status)
+
+              (eval-after-load "magit"
+                (lambda ()
+                  (defun magit-kill-buffers ()
+                    "Restore window configuration and kill all Magit buffers.
+
+See http://manuel-uberti.github.io/emacs/2018/02/17/magit-bury-buffer/"
+                    (interactive)
+                    (let ((buffers (magit-mode-get-buffers)))
+                      (magit-restore-window-configuration)
+                      (mapc #'kill-buffer buffers)))
+                  (define-key magit-status-mode-map (kbd "q") #'magit-kill-buffers)))) ))
 
 
 ;; configure markdown-mode
