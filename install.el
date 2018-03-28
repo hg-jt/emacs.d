@@ -35,9 +35,11 @@
     jade-mode
     less-css-mode
     markdown-mode
-    scala-mode2
+    scala-mode
     web-mode
     yaml-mode
+    go-mode
+    salt-mode
 
     ;; org-mode
     org-with-contrib
@@ -51,6 +53,7 @@
     ;; extras
     auto-complete
     flycheck
+    package-lint
     rainbow-mode
     restclient
     uuid

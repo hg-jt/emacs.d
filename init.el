@@ -167,6 +167,18 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 ;; configure packages most likely installed through the package manager
 (add-hook 'after-init-hook
           (lambda ()
+            ;; configure markdown-mode
+            (when (locate-library "markdown-mode")
+              (add-hook 'markdown-mode-hook
+                        (lambda ()
+                          (set-fill-column 80) ))
+                          ;(turn-on-auto-fill)))
+              (add-to-list 'auto-mode-alist '("\\*md\\*\\'" . markdown-mode)))
+
+            ;; configure restclient-mode
+            (when (locate-library "restclient")
+              (add-to-list 'auto-mode-alist '("\\*web\\*\\'" . restclient-mode)))
+
             ;; configure web-mode
             (when (locate-library "web-mode")
               (setq-default web-mode-markup-indent-offset 2)
@@ -207,18 +219,11 @@ See http://manuel-uberti.github.io/emacs/2018/02/17/magit-bury-buffer/"
                     (let ((buffers (magit-mode-get-buffers)))
                       (magit-restore-window-configuration)
                       (mapc #'kill-buffer buffers)))
-                  (define-key magit-status-mode-map (kbd "q") #'magit-kill-buffers)))) ))
+                  (define-key magit-status-mode-map (kbd "q") #'magit-kill-buffers))))
 
-
-;; configure markdown-mode
-(add-hook 'markdown-mode-hook
-          (lambda ()
-            (set-fill-column 80) ))
-            ;(turn-on-auto-fill)))
-
-
-;; configure scala-mode
-(add-hook 'scala-mode-hook
-          (lambda ()
-            (when (>= emacs-major-version 24)
-              (electric-pair-mode 1))))
+            ;; configure scala-mode
+            (when (locate-library "scala-mode")
+              (add-hook 'scala-mode-hook
+                        (lambda ()
+                          (when (>= emacs-major-version 24)
+                            (electric-pair-mode 1))))) ))
