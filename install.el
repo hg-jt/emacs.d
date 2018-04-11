@@ -32,14 +32,15 @@
 (defvar my-packages
   '(;; misc. languages
     dockerfile-mode
+    go-mode
     jade-mode
     less-css-mode
     markdown-mode
+    nginx-mode
+    salt-mode
     scala-mode
     web-mode
     yaml-mode
-    go-mode
-    salt-mode
 
     ;; org-mode
     org-with-contrib
