@@ -14,6 +14,16 @@
     (add-to-list 'load-path "~/.emacs.d/site-lisp"))
 
 
+;; configure reasonable certificate trust for Emacs on OS X.
+(if (and (eq system-type 'darwin)
+         (file-exists-p "/usr/local/etc/openssl/cert.pem"))
+    (eval-after-load "gnutls"
+      (lambda ()
+        ;; a brew installed openssl will include the cert.pem file in
+        ;; /usr/local/etc/openssl
+        (add-to-list 'gnutls-trustfiles "/usr/local/etc/openssl/cert.pem"))))
+
+
 (require 'package)
 (package-initialize t)
 
@@ -39,7 +49,6 @@
     nginx-mode
     salt-mode
     scala-mode
-    web-mode
     yaml-mode
 
     ;; org-mode
@@ -61,6 +70,8 @@
     yasnippet)
   "A list of packages to install.")
 
+(when (< emacs-major-version 26)
+  (add-to-list 'my-packages 'web-mode t))
 
 ;; update package lists
 (package-refresh-contents)
