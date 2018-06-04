@@ -52,7 +52,7 @@
     yaml-mode
 
     ;; org-mode
-    org-with-contrib
+    org-plus-contrib
     ox-reveal
 
     ;; ext. tools
