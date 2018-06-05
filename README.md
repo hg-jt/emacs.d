@@ -71,6 +71,8 @@ to be on the load-path). All local configuration should go in
 
 ;; OS-X specific customizations
 (when (eq system-type 'darwin)
+  (setq ns-use-thin-smoothing t)        ; better font smoothing
+
   ;; configure path for external processes
   (setenv "PATH"
           (concat "/usr/texbin" ":" "/opt/local/bin" ":" "/usr/local/bin" ":" (getenv "PATH")))
@@ -83,9 +85,36 @@ to be on the load-path). All local configuration should go in
 
 ## Special Considerations
 
+### Clearer Fonts on OS X (Emacs version < 26)
+
+There are a few ways to clear up blurry fonts in OS X. So far, the best results
+have been to use lightweight fonts. Here is an example using *Source Code Pro*:
+
+```lisp
+;; lightweight font
+(set-face-attribute 'default nil :family "Source Code Pro" :weight 'light)
+(set-face-attribute 'default nil :height 140)
+
+
+;; workaround for blurry bold fonts on osx
+(defun faces-bold-to-semibold ()
+  "Switch bold font to semibold."
+  (mapc
+   (lambda (face)
+     (when (eq (face-attribute face :weight) 'bold)
+       (set-face-attribute face nil :weight 'normal)))
+   (face-list)))
+
+(when (eq system-type 'darwin)
+  (mapc (lambda (mode)
+          (eval-after-load mode #'faces-bold-to-semibold))
+        '("markdown-mode" "org")))
+```
+
+
 ### Using Flycheck w/Python
 
-The configuration for using Flycheck w/Python makes a few assumptions, most
+The configuration for using Flychexck w/Python makes a few assumptions, most
 notably that you are using virtualenv and that you have defined a project-level
 variable called `project-venv-name`. You can define this variable in a file
 at the root of your project called `.dir-locals.el`. For example:
