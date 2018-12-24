@@ -1,16 +1,16 @@
 # .emacs.d
 
 Emacs configuration that attempts to be backwards compatible w/stock Emacs
-installations on OS X, Debian (Squeeze), and RHEL 5.5.
+installations on OS X, Debian (Squeeze), and RHEL 6.
 
 
 ## Installing
 
-Modern Emacs comes with a package manager for installing third party Elisp
-packages. This project includes an installation script that installs a set of
-known packages using this package manager. If you are using an older version of
-Emacs that is not supported by the package manager the installation script can
-be omitted.
+Modern Emacs comes with a built-in package manager for installing third party
+Elisp packages. This project includes an installation script that installs a set
+of known packages using the built-in package manager. If you are using an older
+version of Emacs that is not supported by the package manager the installation
+script can be omitted.
 
 
 ### Installing w/Emacs 24 or newer
@@ -37,7 +37,7 @@ be omitted.
 
 This repository is configured to exclude everything in `./site-lisp` and
 `./elpa` from source contorl. This means that you can install packages using
-elpa or by copying the elisp files into `./site-lisp` (which has been configued
+ELPA or by copying the elisp files into `./site-lisp` (which has been configued
 to be on the load-path). All local configuration should go in
 `site-lisp/default.el`.
 

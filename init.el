@@ -31,6 +31,7 @@
       make-backup-files nil                            ; stop creating backup~ files
       compilation-scroll-output t                      ; scroll the compilation buffer
       gc-cons-threshold 10000000                       ; increase threshold for running gc
+      auto-window-vscroll nil                          ; potentially speed up line navigation
       custom-file "~/.emacs.d/custom.el")              ; isolate customizations
 
 ;; use utf-8
