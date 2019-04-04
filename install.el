@@ -67,7 +67,10 @@
     rainbow-mode
     restclient
     uuid
-    yasnippet)
+    yasnippet
+
+    ;; themes
+    dracula-theme)
   "A list of packages to install.")
 
 (when (< emacs-major-version 26)
