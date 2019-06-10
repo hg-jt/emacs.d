@@ -49,6 +49,7 @@
     nginx-mode
     salt-mode
     scala-mode
+    web-mode
     yaml-mode
 
     ;; org-mode
@@ -73,8 +74,6 @@
     dracula-theme)
   "A list of packages to install.")
 
-(when (< emacs-major-version 26)
-  (add-to-list 'my-packages 'web-mode t))
 
 ;; update package lists
 (package-refresh-contents)

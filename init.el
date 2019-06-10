@@ -18,6 +18,7 @@
 (setq-default initial-scratch-message nil              ; disable scratch buffer cruft
               indent-tabs-mode nil                     ; use spaces instead of tabs
               indicate-empty-lines t                   ; indicates an empty line in the fringe
+              ;display-line-numbers t                   ; show line numbers with absolute numbering
               major-mode (lambda ()                    ; use auto-modes for non-file buffers
                            (if buffer-file-name
                                'fundamental-mode
@@ -186,7 +187,8 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
               (setq auto-mode-alist (append '(("\\.r?html?\\'" . web-mode)
                                               ("\\.erb\\'" . web-mode)
                                               ("\\.j2\\'" . web-mode)
-                                              ("\\.jsp\\'" . web-mode))
+                                              ("\\.jsp\\'" . web-mode)
+                                              ("\\.jinja\\'" . web-mode))
                                             auto-mode-alist)))
 
             ;; configure inferior-js-mode
