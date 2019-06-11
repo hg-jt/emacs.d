@@ -71,7 +71,8 @@
     yasnippet
 
     ;; themes
-    dracula-theme)
+    dracula-theme
+    gruvbox-theme)
   "A list of packages to install.")
 
 
