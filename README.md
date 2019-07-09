@@ -112,6 +112,35 @@ have been to use lightweight fonts. Here is an example using *Source Code Pro*:
 ```
 
 
+### Using Custom Themes
+
+```lisp
+;; dracula w/normal size org headers
+(add-hook 'after-init-hook
+          (lambda ()
+            (when (locate-library "dracula-theme")
+              (load-theme 'dracula t)
+
+              ;; use regular size headings in org-mode when dracula is enabled
+              ;; see https://emacs.stackexchange.com/a/22589
+              (add-hook 'org-mode-hook
+                        (lambda ()
+                          (dolist (face '(org-document-title
+                                          org-level-1
+                                          org-level-2
+                                          org-level-3
+                                          org-level-4
+                                          org-level-5))
+                            (set-face-attribute face nil :weight 'semi-bold :height 1.0))))) ))
+
+;; gruvbox w/custom cursor
+(add-hook 'after-init-hook
+          (lambda ()
+            (when (locate-library "gruvbox-theme")
+              (load-theme 'gruvbox-dark-hard t)
+              (set-cursor-color "#fe8019")) ))
+```
+
 ### Using Flycheck w/Python
 
 The configuration for using Flychexck w/Python makes a few assumptions, most
