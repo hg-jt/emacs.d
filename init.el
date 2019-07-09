@@ -177,9 +177,11 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                           ;(turn-on-auto-fill)))
               (add-to-list 'auto-mode-alist '("\\*md\\*\\'" . markdown-mode)))
 
+
             ;; configure restclient-mode
             (when (locate-library "restclient")
               (add-to-list 'auto-mode-alist '("\\*web\\*\\'" . restclient-mode)))
+
 
             ;; configure web-mode
             (when (locate-library "web-mode")
@@ -190,6 +192,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                                               ("\\.jsp\\'" . web-mode)
                                               ("\\.jinja\\'" . web-mode))
                                             auto-mode-alist)))
+
 
             ;; configure inferior-js-mode
             (when (locate-library "js-comint")
@@ -208,6 +211,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 
               (add-hook 'inferior-js-mode-hook 'inferior-js-keybindings))
 
+
             ;; configure magit
             (when (locate-library "magit")
               (global-set-key (kbd "C-x g") 'magit-status)
@@ -224,9 +228,20 @@ See http://manuel-uberti.github.io/emacs/2018/02/17/magit-bury-buffer/"
                       (mapc #'kill-buffer buffers)))
                   (define-key magit-status-mode-map (kbd "q") #'magit-kill-buffers))))
 
+
             ;; configure scala-mode
             (when (locate-library "scala-mode")
               (add-hook 'scala-mode-hook
                         (lambda ()
                           (when (>= emacs-major-version 24)
-                            (electric-pair-mode 1))))) ))
+                            (electric-pair-mode 1)))))
+
+
+            ;; configure polymodes
+            (when (locate-library "polymode")
+              ;; poly-erb
+              (when (locate-library "poly-erb")
+                (setq auto-mode-alist (append '(("\\.js.erb\\'" . poly-js+erb-mode)
+                                                ("\\.coffee.erb\\'" . poly-coffee+erb-mode)
+                                                ("\\.html.erb\\'$" . poly-html+erb-mode))
+                                              auto-mode-alist)))) ))

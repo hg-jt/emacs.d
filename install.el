@@ -7,7 +7,8 @@
 ;; The following list of packges were interesting, but are no longer part of
 ;; this script:
 ;;
-;;   erlang, mult-term, rainbow-delimiters, paredit, exec-path-from-shell
+;;   erlang, mult-term, rainbow-delimiters, paredit, exec-path-from-shell,
+;;   jade-mode, less-css-mode, salt-mode
 
 ;; configure load-path for non-interactive use
 (if noninteractive
@@ -29,7 +30,7 @@
 
 ;; configure ELPA repositories
 (if (< emacs-major-version 24)
-    ;; package repositories for older emacsen
+    ;; package repositories for older emacsen (note the lack of https)
     (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   ;; package repositories for modern emacsen
   (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -43,22 +44,27 @@
   '(;; misc. languages
     dockerfile-mode
     go-mode
-    jade-mode
-    less-css-mode
     markdown-mode
     nginx-mode
-    salt-mode
     scala-mode
     web-mode
     yaml-mode
+
+    ;; polymodes
+    polymode
+    poly-erb
+    poly-markdown
+    poly-rst
 
     ;; org-mode
     org-plus-contrib
     ox-reveal
 
-    ;; ext. tools
+    ;; inferior modes
     inf-ruby
     js-comint
+
+    ;; vcs
     magit
 
     ;; extras
