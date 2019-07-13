@@ -13,11 +13,45 @@ version of Emacs that is not supported by the package manager the installation
 script can be omitted.
 
 
-### Installing w/Emacs 24 or newer
+### Installing with Emacs 24 or newer
 
 1. Clone this repository to `~/.emacs.d`
 
-2. Install external packages: `emacs -batch -l install.el`
+2. Ensure the correct `emacs` is on your path
+
+    **On OS X (with *Emacs For Mac OS X*)**:
+
+    Ensure that the *Emacs For Mac OS X* version of emacs is on your path before
+    the old version that is bundled with the OS.
+
+        ln -s /Applications/Emacs.app/Contents/MacOS/Emacs /usr/local/bin/emacs
+
+    > *NOTE*: This alias will launch the Emacs GUI when run from a terminal
+    > (except when run as a self-executing script). It may also be useful to
+    > create an alias for running the CLI. To do this, add the following to your
+    > `.bash_profile`:
+    >
+    >     alias e='/Applications/Emacs.app/Contents/MacOS/Emacs -nw'
+
+3. Ensure your system has a CA certificate bundle
+
+    **On OS X (with Emacs For Mac OS X)**
+
+    Install *openssl* w/Homebrew (e.g. `brew install openssl`). This will
+    install a the CA bundle in `/usr/local/etc/openssl/cert.pem`.
+
+    > See https://stackoverflow.com/a/28274272 for alternative solutions to this
+    > problem.
+
+3. Install external packages
+
+    Run `./install.el`
+
+    This is a self-executing elisp script that will install the defined
+    packages.
+
+    > *NOTE*: If running this script does not work, you can remove the shebang
+    > line and run it with emacs directly: `emacs -batch -l install.el`
 
 
 ### Installing w/Emacs 23
@@ -30,7 +64,10 @@ script can be omitted.
     for a link to the current version of package.el that is compatible w/Emacs 23.
     Once you have downloaded the file, put it in `~/.emacs.d/site-lisp`.
 
-3. Install external packages: `emacs -batch -l install.el`
+3. Install external packages
+
+    At this point, package installation should be the same as described above
+    for Emacs 24 (or newer).
 
 
 ## Extending

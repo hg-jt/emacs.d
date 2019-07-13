@@ -1,3 +1,4 @@
+#!/usr/bin/env emacs --script
 ;;; install.el --- Emacs package install script
 
 ;; Commentary:
