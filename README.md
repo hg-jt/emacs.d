@@ -189,3 +189,22 @@ at the root of your project called `.dir-locals.el`. For example:
 ;;; .dir-locals.el --- Project configuration.
 ((python-mode . ((project-venv-name . "project-x"))))
 ```
+
+
+### Archiving org-mode entries
+
+In some configurations, org-mode cannot find a function that it needs. The
+workaround is to delete the compiled elc files. While non-ideal, this does
+resolve the issue.
+
+> *NOTE*: This specific error is
+>
+> ```
+> org-copy-subtree: Invalid function: org-preserve-local-variables
+> ```
+
+
+```sh
+cd ~/.emacs.d/elpa
+find org-plus*/*.elc -print0 | xargs -0 rm
+```

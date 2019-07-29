@@ -1,19 +1,23 @@
 # .gitignore --- Configures files to ignore from this Git repository.
 
-# Local packages
-site-lisp
-elpa
-
-
-# Local configuration
+# --------------------
+# Generated Files
+# --------------------
 auto-save-list
 bookmarks
 custom.el
-.trello
-
-
-# Generated files
+history
 network-security.data
 tramp
+transient
 url
+.trello
 *.dat
+*.sqlite
+
+
+# --------------------
+# Local packages
+# --------------------
+site-lisp
+elpa
