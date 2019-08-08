@@ -100,12 +100,15 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
            org-alphabetical-lists t                    ; enable single character alpha bullets
            org-src-fontify-natively t                  ; makes code blocks pretty
 
-           ;; configure org export
+           ;; org export
            org-export-ascii-underline '(?\- ?\= ?\~ ?\# ?^ ?\$)  ; configure ascii export underlines
            org-latex-listings t                                  ; use the listings package in LaTeX export
 
-           ;; define TODO task workflow
-           org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")))
+           ;; TODO task workflow
+           org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)"))
+
+           ;; org-agenda
+           org-agenda-window-setup 'current-window)
 
 
      (defun org-summary-todo (n-done n-not-done)

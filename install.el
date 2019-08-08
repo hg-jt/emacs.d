@@ -60,6 +60,7 @@
     ;; org-mode
     org-plus-contrib
     ox-reveal
+    htmlize
 
     ;; inferior modes
     inf-ruby
