@@ -246,11 +246,11 @@ should be added to `~/.emacs.d/site-lisp/default.el`, rather than the main
     
     ```elisp
     (eval-after-load "tls"
-  (lambda ()
-    ;; force the use of external gnutls-cli for custom certs
-    (when (fboundp 'gnutls-available-p)
-      (defun gnutls-available-p () nil))
+      (lambda ()
+        ;; force the use of external gnutls-cli for custom certs
+        (when (fboundp 'gnutls-available-p)
+          (defun gnutls-available-p () nil))
 
-    ;; add custom gnutls-cli command
-    (add-to-list 'tls-program "gnutls-cli -p %p --x509cafile /path/to/ca/ca.pem --x509keyfile /path/to/key/key.pem --x509certfile /path/to/cert/public.pem %h")))
+        ;; add custom gnutls-cli command
+        (add-to-list 'tls-program "gnutls-cli -p %p --x509cafile /path/to/ca/ca.pem --x509keyfile /path/to/key/key.pem --x509certfile /path/to/cert/public.pem %h")))
     ```
