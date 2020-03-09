@@ -155,7 +155,8 @@ have been to use lightweight fonts. Here is an example using *Source Code Pro*:
 ;; dracula w/normal size org headers
 (add-hook 'after-init-hook
           (lambda ()
-            (when (locate-library "dracula-theme")
+            (when (and window-system
+                       (locate-library "dracula-theme"))
               (load-theme 'dracula t)
 
               ;; use regular size headings in org-mode when dracula is enabled
@@ -252,5 +253,7 @@ should be added to `~/.emacs.d/site-lisp/default.el`, rather than the main
           (defun gnutls-available-p () nil))
 
         ;; add custom gnutls-cli command
-        (add-to-list 'tls-program "gnutls-cli -p %p --x509cafile /path/to/ca/ca.pem --x509keyfile /path/to/key/key.pem --x509certfile /path/to/cert/public.pem %h")))
+        (add-to-list 'tls-program
+                     "gnutls-cli -p %p --x509cafile /path/to/ca/ca.pem --x509keyfile /path/to/key/key.pem --x509certfile /path/to/cert/public.pem %h"
+                     t)))
     ```

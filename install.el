@@ -75,6 +75,7 @@
     package-lint
     rainbow-mode
     restclient
+    skeletor
     uuid
     yasnippet
 
