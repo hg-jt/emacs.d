@@ -157,19 +157,9 @@ have been to use lightweight fonts. Here is an example using *Source Code Pro*:
           (lambda ()
             (when (and window-system
                        (locate-library "dracula-theme"))
-              (load-theme 'dracula t)
-
-              ;; use regular size headings in org-mode when dracula is enabled
-              ;; see https://emacs.stackexchange.com/a/22589
-              (add-hook 'org-mode-hook
-                        (lambda ()
-                          (dolist (face '(org-document-title
-                                          org-level-1
-                                          org-level-2
-                                          org-level-3
-                                          org-level-4
-                                          org-level-5))
-                            (set-face-attribute face nil :weight 'semi-bold :height 1.0))))) ))
+              (setq dracula-enlarge-headings nil
+                    dracula-alternate-mode-line-and-minibuffer t)
+              (load-theme 'dracula t)) ))
 
 ;; gruvbox w/custom cursor
 (add-hook 'after-init-hook
