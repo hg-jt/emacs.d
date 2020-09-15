@@ -157,8 +157,9 @@ have been to use lightweight fonts. Here is an example using *Source Code Pro*:
           (lambda ()
             (when (and window-system
                        (locate-library "dracula-theme"))
-              (setq dracula-enlarge-headings nil
-                    dracula-alternate-mode-line-and-minibuffer t)
+              ;; customize dracula
+              (setq dracula-enlarge-headings nil  ; normal sized headers
+                    dracula-alternate-mode-line-and-minibuffer t)  ; alt mode line
               (load-theme 'dracula t)) ))
 
 ;; gruvbox w/custom cursor

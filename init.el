@@ -67,8 +67,10 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
   (let ((default-directory (concat dir "/")))
     (normal-top-level-add-subdirs-to-load-path)))
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
-(add-subdirs-to-load-path "~/.emacs.d/site-lisp")
+(let ((local-site-lisp-dir "~/.emacs.d/site-lisp"))
+  (when (file-directory-p local-site-lisp-dir)
+    (add-to-list 'load-path local-site-lisp-dir)
+    (add-subdirs-to-load-path local-site-lisp-dir)))
 
 
 ;; initialize ELPA for older emacsen
