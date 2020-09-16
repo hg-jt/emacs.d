@@ -95,8 +95,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 (eval-after-load "org"
   '(progn
      ;; configure org behavior
-     (setq org-startup-indented nil                    ; not sure if this is working
-           org-hide-leading-stars t                    ; hiding excess stars for readability
+     (setq org-hide-leading-stars t                    ; hiding excess stars for readability
            org-odd-levels-only t                       ; skip levels for readability
            org-log-done t                              ; adds a timestamp to completed tasks
            org-alphabetical-lists t                    ; enable single character alpha bullets
@@ -107,7 +106,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
            org-latex-listings t                                  ; use the listings package in LaTeX export
 
            ;; TODO task workflow
-           org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)"))
+           org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)" "OBE(o)"))
 
            ;; org-agenda
            org-agenda-window-setup 'current-window)
@@ -118,15 +117,16 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
        (let (org-log-done org-log-states)   ; turn off logging
          (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
-
      (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
-     (add-hook 'org-mode-hook
-               (lambda ()
-                 ;; configure editing preferences
-                 (setq fill-column 80
-                       sentence-end-double-space nil)
-                 (turn-on-auto-fill))
-               t)
+
+     (defun org-editing-preferences ()
+       "Set basic buffer level editing preferences."
+       (setq fill-column 80
+             sentence-end-double-space nil)
+       (turn-on-auto-fill))
+
+     (add-hook 'org-mode-hook 'org-editing-preferences)
+
 
      (add-to-list 'auto-mode-alist '("\\*org\\*\\'" . org-mode)) ))
 
