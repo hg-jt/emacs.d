@@ -147,7 +147,8 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 
   ;; declare 'project-venv-name' as safe variable when defined
   ;; as a string in .dir-locals.el or as a file local variable.
-  (put 'project-venv-name 'safe-local-variable #'stringp)
+  ;(put 'project-venv-name 'safe-local-variable #'stringp)
+  (put 'python-shell-interpreter 'safe-local-variable #'stringp)
 
   ;; initialize pylint via virtualenv and flycheck
   ;; @see https://github.com/porterjamesj/virtualenvwrapper.el
