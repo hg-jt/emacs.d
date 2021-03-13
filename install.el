@@ -36,15 +36,16 @@
   ;; package repositories for modern emacsen
   (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                            ;("marmalade" . "https://marmalade-repo.org/packages/")
-                           ("org" . "https://orgmode.org/elpa/")
+                           ;("melpa-stable" . "https://stable.melpa.org/packages/")
                            ("melpa" . "https://melpa.org/packages/")
-                           ("melpa-stable" . "https://stable.melpa.org/packages/"))) )
+                           ("org" . "https://orgmode.org/elpa/"))))
 
 
 (defvar my-packages
   '(;; misc. languages
     dockerfile-mode
     go-mode
+    ini-mode
     markdown-mode
     nginx-mode
     scala-mode
@@ -71,7 +72,9 @@
 
     ;; extras
     auto-complete
+    docker-tramp
     flycheck
+    keycast
     package-lint
     rainbow-mode
     restclient
