@@ -125,10 +125,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
              sentence-end-double-space nil)
        (turn-on-auto-fill))
 
-     (add-hook 'org-mode-hook 'org-editing-preferences)
-
-
-     (add-to-list 'auto-mode-alist '("\\*org\\*\\'" . org-mode)) ))
+     (add-hook 'org-mode-hook 'org-editing-preferences) ))
 
 
 ;; configure ruby-mode

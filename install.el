@@ -59,6 +59,7 @@
     poly-rst
 
     ;; org-mode
+    ob-mermaid
     org-plus-contrib
     ox-reveal
     htmlize
