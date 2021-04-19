@@ -48,6 +48,7 @@
     ini-mode
     markdown-mode
     nginx-mode
+    rust-mode
     scala-mode
     web-mode
     yaml-mode

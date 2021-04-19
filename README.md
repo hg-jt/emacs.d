@@ -1,7 +1,7 @@
 # .emacs.d
 
 Emacs configuration that attempts to be backwards compatible w/stock Emacs
-installations on OS X, Debian (Squeeze), and RHEL 6.
+installations on OS X, Debian (Wheezy), and RHEL 7.
 
 
 ## Installing
@@ -27,9 +27,9 @@ script can be omitted.
         ln -s /Applications/Emacs.app/Contents/MacOS/Emacs /usr/local/bin/emacs
 
     > *NOTE*: This alias will launch the Emacs GUI when run from a terminal
-    > (except when run as a self-executing script). It may also be useful to
+    > *except when run as a self-executing script*. It may also be useful to
     > create an alias for running the CLI. To do this, add the following to your
-    > `.bash_profile`:
+    > shell configuration (e.g. `.bash_profile`, `.zshrc`, etc.):
     >
     >     alias e='/Applications/Emacs.app/Contents/MacOS/Emacs -nw'
 
@@ -73,7 +73,7 @@ script can be omitted.
 ## Extending
 
 This repository is configured to exclude everything in `./site-lisp` and
-`./elpa` from source contorl. This means that you can install packages using
+`./elpa` from source control. This means that you can install packages using
 ELPA or by copying the elisp files into `./site-lisp` (which has been configued
 to be on the load-path). All local configuration should go in
 `site-lisp/default.el`.
@@ -172,7 +172,7 @@ have been to use lightweight fonts. Here is an example using *Source Code Pro*:
 
 ### Using Flycheck w/Python
 
-The configuration for using Flychexck w/Python makes a few assumptions, most
+The configuration for using Flycheck w/Python makes a few assumptions, most
 notably that you are using virtualenv and that you have defined a project-level
 variable called `project-venv-name`. You can define this variable in a file
 at the root of your project called `.dir-locals.el`. For example:
