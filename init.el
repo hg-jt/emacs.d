@@ -79,53 +79,57 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
   (package-initialize))
 
 
+;; add support for with-eval-after-load macro for older emacsen
+(when (not (fboundp 'with-eval-after-load))
+  (defmacro with-eval-after-load (file &rest body)
+    `(eval-after-load ,file (lambda () ,@body))))
+
+
 ;; configure sh-mode
 (setq-default sh-basic-offset 2
               sh-indentation 2)
 
 
 ;; configure cc-mode
-(eval-after-load "cc-mode"
-  '(progn
-     ;(which-function-mode)
-     (define-key c-mode-map (kbd "C-c o") 'ff-find-other-file)))
+(with-eval-after-load "cc-mode"
+  ;(which-function-mode)
+  (define-key c-mode-map (kbd "C-c o") 'ff-find-other-file))
 
 
 ;; configure org-mode
-(eval-after-load "org"
-  '(progn
-     ;; configure org behavior
-     (setq org-hide-leading-stars t                    ; hiding excess stars for readability
-           org-odd-levels-only t                       ; skip levels for readability
-           org-log-done t                              ; adds a timestamp to completed tasks
-           org-alphabetical-lists t                    ; enable single character alpha bullets
-           org-src-fontify-natively t                  ; makes code blocks pretty
+(with-eval-after-load "org"
+  ;; configure org behavior
+  (setq org-hide-leading-stars t                    ; hiding excess stars for readability
+        org-odd-levels-only t                       ; skip levels for readability
+        org-log-done t                              ; adds a timestamp to completed tasks
+        org-alphabetical-lists t                    ; enable single character alpha bullets
+        org-src-fontify-natively t                  ; makes code blocks pretty
 
-           ;; org export
-           org-export-ascii-underline '(?\- ?\= ?\~ ?\# ?^ ?\$)  ; configure ascii export underlines
-           org-latex-listings t                                  ; use the listings package in LaTeX export
+        ;; org export
+        org-export-ascii-underline '(?\- ?\= ?\~ ?\# ?^ ?\$)  ; configure ascii export underlines
+        org-latex-listings t                                  ; use the listings package in LaTeX export
 
-           ;; TODO task workflow
-           org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)" "OBE(o)"))
+        ;; TODO task workflow
+        org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)" "OBE(o)"))
 
-           ;; org-agenda
-           org-agenda-window-setup 'current-window)
+        ;; org-agenda
+        org-agenda-window-setup 'current-window)
 
 
-     (defun org-summary-todo (n-done n-not-done)
-       "Switch entry to DONE when all subentries are done, to TODO otherwise."
-       (let (org-log-done org-log-states)   ; turn off logging
-         (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+  (defun org-summary-todo (n-done n-not-done)
+    "Switch entry to DONE when all subentries are done, to TODO otherwise."
+    (let (org-log-done org-log-states)   ; turn off logging
+      (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
-     (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
-     (defun org-editing-preferences ()
-       "Set basic buffer level editing preferences."
-       (setq fill-column 80
-             sentence-end-double-space nil)
-       (turn-on-auto-fill))
+  (defun org-editing-preferences ()
+    "Set basic buffer level editing preferences."
+    (setq fill-column 80
+          sentence-end-double-space nil)
+    (turn-on-auto-fill))
 
-     (add-hook 'org-mode-hook 'org-editing-preferences) ))
+  (add-hook 'org-mode-hook 'org-editing-preferences) )
 
 
 ;; configure ruby-mode
@@ -219,25 +223,21 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
             (when (locate-library "magit")
               (global-set-key (kbd "C-x g") 'magit-status)
 
-              (eval-after-load "magit"
-                (lambda ()
-                  (defun magit-kill-buffers ()
-                    "Restore window configuration and kill all Magit buffers.
+              (with-eval-after-load "magit"
+                (defun magit-kill-buffers ()
+                  "Restore window configuration and kill all Magit buffers.
 
 See http://manuel-uberti.github.io/emacs/2018/02/17/magit-bury-buffer/"
-                    (interactive)
-                    (let ((buffers (magit-mode-get-buffers)))
-                      (magit-restore-window-configuration)
-                      (mapc #'kill-buffer buffers)))
-                  (define-key magit-status-mode-map (kbd "q") #'magit-kill-buffers))))
+                  (interactive)
+                  (let ((buffers (magit-mode-get-buffers)))
+                    (magit-restore-window-configuration)
+                    (mapc #'kill-buffer buffers)))
+                (define-key magit-status-mode-map (kbd "q") #'magit-kill-buffers)))
 
 
             ;; configure scala-mode
-            (when (locate-library "scala-mode")
-              (add-hook 'scala-mode-hook
-                        (lambda ()
-                          (when (>= emacs-major-version 24)
-                            (electric-pair-mode 1)))))
+            (when (and (locate-library "scala-mode") (>= emacs-major-version 24))
+              (add-hook 'scala-mode-hook 'electric-pair-mode))
 
 
             ;; configure polymodes
