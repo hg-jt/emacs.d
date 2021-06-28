@@ -104,6 +104,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
         org-log-done t                              ; adds a timestamp to completed tasks
         org-alphabetical-lists t                    ; enable single character alpha bullets
         org-src-fontify-natively t                  ; makes code blocks pretty
+        org-adapt-indentation nil                   ; prevent automatic indentation
 
         ;; org export
         org-export-ascii-underline '(?\- ?\= ?\~ ?\# ?^ ?\$)  ; configure ascii export underlines
@@ -165,8 +166,9 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                                                 (venv-workon project-venv-name)))) ))) )
 
 
-;; configure js-mode
-(setq-default js-indent-level 2)
+;; configure css-mode & js-mode
+(setq-default css-indent-offset 2
+              js-indent-level 2)
 
 
 ;; configure latex-mode

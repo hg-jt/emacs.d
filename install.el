@@ -9,7 +9,7 @@
 ;; this script:
 ;;
 ;;   erlang, mult-term, rainbow-delimiters, paredit, exec-path-from-shell,
-;;   jade-mode, less-css-mode, salt-mode
+;;   jade-mode, less-css-mode, salt-mode, auto-complete
 
 ;; configure load-path for non-interactive use
 (if noninteractive
@@ -59,6 +59,10 @@
     poly-markdown
     poly-rst
 
+    ;; lsp
+    lsp-mode
+    lsp-pyright
+
     ;; org-mode
     ob-mermaid
     org-plus-contrib
@@ -73,7 +77,7 @@
     magit
 
     ;; extras
-    auto-complete
+    company
     docker-tramp
     flycheck
     keycast

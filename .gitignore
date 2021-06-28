@@ -7,10 +7,12 @@ auto-save-list
 bookmarks
 custom.el
 history
+games
 network-security.data
 tramp
 transient
 url
+.lsp-session*
 .trello
 *.dat
 *.sqlite
