@@ -15,8 +15,9 @@ url
 .lsp-session*
 .trello
 *.dat
+*.pdf
 *.sqlite
-
+*.tex
 
 # --------------------
 # Local packages
