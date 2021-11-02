@@ -35,7 +35,7 @@
     (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   ;; package repositories for modern emacsen
   (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                           ("org-contrib" . "https://elpa.nongnu.org/nongnu/")
+                           ("nongnu" . "https://elpa.nongnu.org/nongnu/")
                            ("melpa" . "https://melpa.org/packages/"))))
 
 
