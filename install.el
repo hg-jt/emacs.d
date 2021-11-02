@@ -35,9 +35,7 @@
     (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   ;; package repositories for modern emacsen
   (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                           ("org" . "https://orgmode.org/elpa/")
-                           ;("marmalade" . "https://marmalade-repo.org/packages/")
-                           ;("melpa-stable" . "https://stable.melpa.org/packages/")
+                           ("org-contrib" . "https://elpa.nongnu.org/nongnu/")
                            ("melpa" . "https://melpa.org/packages/"))))
 
 
@@ -64,8 +62,9 @@
     lsp-pyright
 
     ;; org-mode
+    org
+    org-contrib
     ob-mermaid
-    org-plus-contrib
     ox-reveal
     htmlize
 
