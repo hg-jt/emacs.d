@@ -15,12 +15,12 @@ Emacs knows what =python= executable to use for interactive features.
 
 1. Install Pyright
 
-   Pyright is installed/packaged as an NPM module. The [Pyright installation
-   instructions] recommend installing it globally (e.g. =npm install -g
+   Pyright is installed/packaged as an NPM module. The [[https://github.com/microsoft/pyright#emacs][Pyright installation
+   instructions]] recommend installing it globally (e.g. =npm install -g
    pyright=). This is sufficient regardless of how you installed node/npm.
 
    You will need to know where the =pyright= executable gets installed. You can
-   find this out by running =which pyright=. For example on OS X, using [NVM], the
+   find this out by running =which pyright=. For example on OS X, using [[https://github.com/nvm-sh/nvm][NVM]], the
    pyright executable is in =~/.nvm/versions/node/<version>/bin=.
 
 2. Install LSP/Pyright support in Emacs
@@ -92,6 +92,3 @@ Emacs knows what =python= executable to use for interactive features.
                  (setq-local python-shell-interpreter python-path) ))
        (python-shell-interpreter-args . "-i") ))
    #+END_src
-
-[Pyright installation instructions]: https://github.com/microsoft/pyright#emacs
-[NVM]: https://github.com/nvm-sh/nvm
