@@ -23,7 +23,8 @@
                            (if buffer-file-name
                                'fundamental-mode
                              (let ((buffer-file-name (buffer-name)))
-                               (set-auto-mode)))) )
+                               (set-auto-mode))))
+              sentence-end-double-space nil)           ; single space between sentences
 
 
 ;; general configuration
@@ -144,6 +145,14 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 
 
 ;; configure python.el
+(defun find-and-set-local-python-shell-interpreter ()
+  "Locate the virtual environment directory and set
+`python-shell-interpreter' to the associated python executable"
+  (let* ((venv-dir-name ".venv")
+         (venv-parent (locate-dominating-file buffer-file-name venv-dir-name)))
+    (when venv-parent
+      (setq python-shell-interpreter (concat venv-parent venv-dir-name "/bin/python")))))
+
 (when (locate-library "python")
   (setq auto-mode-alist (append '(("\\.pythonrc\\'" . python-mode)) auto-mode-alist))
 
@@ -152,18 +161,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
   ;(put 'project-venv-name 'safe-local-variable #'stringp)
   (put 'python-shell-interpreter 'safe-local-variable #'stringp)
 
-  ;; initialize pylint via virtualenv and flycheck
-  ;; @see https://github.com/porterjamesj/virtualenvwrapper.el
-  (add-hook 'after-init-hook
-            (lambda ()
-              (when (locate-library "flycheck")
-                (add-hook 'python-mode-hook (lambda ()
-                                              ;; attempt to use virtualenvwrapper.el
-                                              (hack-local-variables)
-                                              (when (and
-                                                     (locate-library "virtualenvwrapper")
-                                                     (boundp 'project-venv-name))
-                                                (venv-workon project-venv-name)))) ))) )
+  (add-hook 'python-mode-hook 'find-and-set-local-python-shell-interpreter))
 
 
 ;; configure css-mode & js-mode
