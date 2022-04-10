@@ -149,7 +149,8 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
   "Locate the virtual environment directory and set
 `python-shell-interpreter' to the associated python executable"
   (let* ((venv-dir-name ".venv")
-         (venv-parent (locate-dominating-file buffer-file-name venv-dir-name)))
+         (venv-parent (when buffer-file-name
+                        (locate-dominating-file buffer-file-name venv-dir-name))))
     (when venv-parent
       (setq python-shell-interpreter (concat venv-parent venv-dir-name "/bin/python")))))
 
