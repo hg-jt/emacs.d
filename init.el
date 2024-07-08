@@ -75,10 +75,19 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
     (add-subdirs-to-load-path local-site-lisp-dir)))
 
 
-;; initialize ELPA for older emacsen
-(when (and (< emacs-major-version 24) (locate-library "package"))
-  (require 'package)
-  (package-initialize))
+(if (< emacs-major-version 24)
+  ;; initialize ELPA for older emacsen
+  (when (locate-library "package")
+    (require 'package)
+    (package-initialize)
+    ;; package repositories for older emacsen (note the lack of https)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
+
+  ;; configure package repositories for modern emacsen
+  (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                           ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                           ("melpa" . "https://melpa.org/packages/")
+                           ("melpa-stable" . "https://stable.melpa.org/packages/"))) )
 
 
 ;; add support for with-eval-after-load macro for older emacsen
