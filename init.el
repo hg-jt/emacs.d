@@ -199,6 +199,11 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                           ;(turn-on-auto-fill)))
               (add-to-list 'auto-mode-alist '("\\*md\\*\\'" . markdown-mode)))
 
+            ;; configure rst-mode
+            (when (locate-library "rst")
+              (add-hook 'rst-mode-hook
+                        (lambda ()
+                          (set-fill-column 80) )))
 
             ;; configure restclient-mode
             (when (locate-library "restclient")
