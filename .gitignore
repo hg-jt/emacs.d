@@ -9,8 +9,10 @@ custom.el
 history
 games
 network-security.data
+org-persist
 tramp
 transient
+tree-sitter
 url
 .lsp-session*
 .trello

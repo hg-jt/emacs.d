@@ -29,6 +29,7 @@
 (require 'package)
 (package-initialize t)
 
+
 ;; configure ELPA repositories
 (if (< emacs-major-version 24)
     ;; package repositories for older emacsen (note the lack of https)
@@ -38,6 +39,19 @@
                            ("nongnu" . "https://elpa.nongnu.org/nongnu/")
                            ("melpa" . "https://melpa.org/packages/")
                            ("melpa-stable" . "https://stable.melpa.org/packages/"))))
+
+
+;; tree sitter languages
+;; see https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+(setq treesit-language-source-alist
+      '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+        (cmake "https://github.com/uyha/tree-sitter-cmake")
+        (css "https://github.com/tree-sitter/tree-sitter-css")
+        (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+        (json "https://github.com/tree-sitter/tree-sitter-json")
+        (python "https://github.com/tree-sitter/tree-sitter-python")
+        (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
+        (rust "https://github.com/tree-sitter/tree-sitter-rust") ))
 
 
 (defvar my-packages
@@ -103,3 +117,9 @@
       (package-install p)
     (error
      (message "WARNING: skipping %s" p))) )
+
+
+;; install language grammers
+(when (and (fboundp 'treesit-available-p) (treesit-available-p))
+  (mapc #'treesit-install-language-grammar
+        (mapcar #'car treesit-language-source-alist)))

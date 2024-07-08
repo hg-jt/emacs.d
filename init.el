@@ -172,7 +172,11 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
   ;(put 'project-venv-name 'safe-local-variable #'stringp)
   (put 'python-shell-interpreter 'safe-local-variable #'stringp)
 
-  (add-hook 'python-mode-hook 'find-and-set-local-python-shell-interpreter))
+  ;; python.el's support for tree-sitter is split across two-separate
+  ;; modes, python-mode and python-ts-mode, both of which extend
+  ;; python-base-mode. The difference affects the mode hooks.
+  (add-hook (if (fboundp 'python-base-mode) 'python-base-mode 'python-mode)
+            'find-and-set-local-python-shell-interpreter))
 
 
 ;; configure css-mode & js-mode

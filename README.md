@@ -1,16 +1,18 @@
 # .emacs.d
 
-Emacs configuration that attempts to be backwards compatible w/stock Emacs
-installations on OS X, Debian (Wheezy), and RHEL 7.
+Custom GNU Emacs configuration.
+
+Some attempt has been maded to be resonably backwards compatible going back to
+~24.1 reliably and possibly as far back as 23.1.
 
 
 ## Installing
 
 Modern Emacs comes with a built-in package manager for installing third party
 Elisp packages. This project includes an installation script that installs a set
-of known packages using the built-in package manager. If you are using an older
-version of Emacs that is not supported by the package manager the installation
-script can be omitted.
+of known packages using the built-in package manager as well as a collection of
+tree sitter grammers. If you are using an older version of Emacs that is not
+supported by the package manager the installation script can be omitted.
 
 
 ### Installing with Emacs 24 or newer
@@ -27,7 +29,7 @@ script can be omitted.
 
         ln -s /Applications/Emacs.app/Contents/MacOS/Emacs /usr/local/bin/emacs
 
-    > *NOTE*: This alias will launch the Emacs GUI when run from a terminal It
+    > *NOTE*: This script will launch the Emacs GUI when run from a terminal It
     > may also be useful to create an alias for running the Emacs CLI. To do
     > this, add the following to your shell configuration (e.g. `.bash_profile`,
     > `.zshrc`, etc.):
@@ -119,3 +121,4 @@ to be on the load-path). All local configuration should go in
   (setq exec-path
         (append exec-path '("/usr/local/bin"))) )
 ```
+
