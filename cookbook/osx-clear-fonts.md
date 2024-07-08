@@ -1,16 +1,17 @@
-#+TITLE: Clearer Fonts on OS X (Emacs version < 26)
+# Clearer Fonts on OS X (Emacs version < 26)
 
-* Problem
+## Problem
 
 Fonts are blurry in the GUI version of Emacs on Mac OS X.
 
 
-* Solution
+## Solution
 
 There are a few ways to clear up blurry fonts in OS X. So far, the best results
-have been to use lighter weight fonts. Here is an example using [[https://github.com/adobe-fonts/source-code-pro][Source Code Pro]]:
+have been to use lighter weight fonts. Here is an example using [Source Code
+Pro]:
 
-#+BEGIN_src elisp
+```lisp
 ;; lightweight font
 (set-face-attribute 'default nil :family "Source Code Pro" :weight 'light)
 (set-face-attribute 'default nil :height 140)
@@ -29,4 +30,6 @@ have been to use lighter weight fonts. Here is an example using [[https://github
   (mapc (lambda (mode)
           (eval-after-load mode #'faces-bold-to-semibold))
         '("markdown-mode" "org")))
-#+END_src
+```
+
+[Source Code Pro]: https://github.com/adobe-fonts/source-code-pro

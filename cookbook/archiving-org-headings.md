@@ -1,20 +1,20 @@
-#+TITLE: Archiving org-mode entries
+# Archiving org-mode Entries
 
-* Problem
+## Problem
 
 Org-mode raises an error when archiving entries:
 
-#+BEGIN_verbatim
+```
 org-copy-subtree: Invalid function: org-preserve-local-variables
-#+END_verbatim
+```
 
-* Solution
+## Solution
 
 In some configurations, org-mode cannot find a function that it needs. The
 workaround is to delete the compiled elc files. While non-ideal, this does
 resolve the issue.
 
-#+BEGIN_src sh
+```sh
 cd ~/.emacs.d/elpa
 find org-plus*/*.elc -print0 | xargs -0 rm
-#+END_src
+```

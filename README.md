@@ -84,7 +84,7 @@ to be on the load-path). All local configuration should go in
 
 ### Local Customization Example
 
-```elisp
+```lisp
 ;;; site-lisp/default.el --- Local Emacs customizations.
 
 ;; look & feel
@@ -120,5 +120,23 @@ to be on the load-path). All local configuration should go in
   ;; configure path for subprocesses
   (setq exec-path
         (append exec-path '("/usr/local/bin"))) )
+
+;; use tree-sitter grammers
+(setq major-mode-remap-alist
+      '((bash-mode . bash-ts-mode)
+        (css-mode . css-ts-mode)
+        (js-mode . js-ts-mode)
+        (json-mode . json-ts-mode)
+        (python-mode . python-ts-mode)
+        (ruby-mode . ruby-ts-mode)
+        ;(rust-mode . rust-ts-mode)
+   ))
 ```
 
+## Cookbook
+
+- [Archiving org-mode Entries](./cookbook/archiving-org-headings.md)
+- [Using Custom Themes](./cookbook/custom-themes.md)
+- [Clearer Fonts on OS X (Emacs version < 26)](./cookbook/osx-clear-fonts.md)
+- [Pyright and lsp-mode](./cookbook/pyright.md)
+- [Two-way SSL w/custom client certs with *Emacs for OSX*](./cookbook/two-way-ssl.md)

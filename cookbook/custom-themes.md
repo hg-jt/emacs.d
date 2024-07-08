@@ -1,28 +1,28 @@
-#+TITLE: Using Custom Themes
+# Using Custom Themes
 
-* Problem
+## Problem
 
 You want to use a custom theme in the GUI version of Emacs, but not in the TUI
 version.
 
 
-* Solution
+## Solution
 
-To configure and enable a theme only in the GUI version of emacs, check for
-the a non-nil value in =window-system=.
+To configure and enable a theme only in the GUI version of emacs, check for the
+a non-nil value in `window-system`.
 
-*** Example 1: Built-in Theme
+### Example 1: Built-in Theme
 
-#+BEGIN_src elisp
+```lisp
 (when window-system
   ;; set the theme
   (load-theme 'wombat t))
-#+END_src
+```
 
 
-*** Example 2: Dracula
+### Example 2: Dracula
 
-#+BEGIN_src lisp
+```lisp
 ;; dracula w/normal size org headers
 (add-hook 'after-init-hook
           (lambda ()
@@ -32,15 +32,16 @@ the a non-nil value in =window-system=.
               (setq dracula-enlarge-headings nil                   ; normal sized headers
                     dracula-alternate-mode-line-and-minibuffer t)  ; alt mode line
               (load-theme 'dracula t)) ))
-#+END_src
+```
 
 
-*** Example 3: Gruvbox
-#+BEGIN_src elisp
+### Example 3: Gruvbox
+
+```lisp
 ;; gruvbox w/custom cursor
 (add-hook 'after-init-hook
           (lambda ()
             (when (locate-library "gruvbox-theme")
               (load-theme 'gruvbox-dark-hard t)
               (set-cursor-color "#fe8019")) ))
-#+END_src
+```
