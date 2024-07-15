@@ -35,7 +35,11 @@
       gc-cons-threshold 10000000                       ; increase threshold for running gc
       auto-window-vscroll nil                          ; potentially speed up line navigation
       dired-kill-when-opening-new-dired-buffer t       ; limit buffer useage in dired
-      custom-file "~/.emacs.d/custom.el")              ; isolate customizations
+      custom-file (concat user-emacs-directory
+                          "custom.el"))                ; isolate customizations
+
+;; load custom file
+(load custom-file 'noerror)
 
 ;; use utf-8
 (prefer-coding-system 'utf-8)
