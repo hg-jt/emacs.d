@@ -9,7 +9,8 @@
 ;; this script:
 ;;
 ;;   erlang, mult-term, rainbow-delimiters, paredit, exec-path-from-shell,
-;;   jade-mode, less-css-mode, salt-mode, auto-complete
+;;   jade-mode, less-css-mode, salt-mode, auto-complete, scala-mode,
+;;   docker-tramp, dockerfile-mode, go-mode, lsp-mode, lsp-pyright
 
 ;; configure load-path for non-interactive use
 (if noninteractive
@@ -47,6 +48,7 @@
       '((bash "https://github.com/tree-sitter/tree-sitter-bash")
         (cmake "https://github.com/uyha/tree-sitter-cmake")
         (css "https://github.com/tree-sitter/tree-sitter-css")
+        (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
         (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
         (json "https://github.com/tree-sitter/tree-sitter-json")
         (python "https://github.com/tree-sitter/tree-sitter-python")
@@ -56,8 +58,7 @@
 
 (defvar my-packages
   '(;; misc. languages
-    dockerfile-mode
-    go-mode
+    groovy-mode
     ini-mode
     markdown-mode
     nginx-mode
@@ -71,10 +72,6 @@
     poly-erb
     poly-markdown
     poly-rst
-
-    ;; lsp
-    lsp-mode
-    lsp-pyright
 
     ;; org-mode
     org
@@ -93,8 +90,11 @@
     ;; extras
     company
     flycheck
+    flymake-ruff
+    git-modes
     keycast
     package-lint
+    pip-requirements
     rainbow-mode
     restclient
     skeletor
