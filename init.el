@@ -166,7 +166,8 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
          (venv-parent (when buffer-file-name
                         (locate-dominating-file buffer-file-name venv-dir-name))))
     (when venv-parent
-      (setq python-shell-interpreter (concat venv-parent venv-dir-name "/bin/python")))))
+      (setq python-shell-interpreter (concat venv-parent venv-dir-name "/bin/python"))
+      )))
 
 (when (locate-library "python")
   (setq auto-mode-alist (append '(("\\.pythonrc\\'" . python-mode)) auto-mode-alist))
@@ -179,7 +180,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
   ;; python.el's support for tree-sitter is split across two-separate
   ;; modes, python-mode and python-ts-mode, both of which extend
   ;; python-base-mode. The difference affects the mode hooks.
-  (add-hook (if (fboundp 'python-base-mode) 'python-base-mode 'python-mode)
+  (add-hook (if (fboundp 'python-base-mode) 'python-base-mode-hook 'python-mode-hook)
             'find-and-set-local-python-shell-interpreter))
 
 
@@ -199,7 +200,8 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
             (when (locate-library "markdown-mode")
               (add-hook 'markdown-mode-hook
                         (lambda ()
-                          (set-fill-column 80) ))
+                          (set-fill-column 80)
+                          (setq-local compile-command (format "pd %s" (file-name-nondirectory (buffer-file-name))))))
                           ;(turn-on-auto-fill)))
               (add-to-list 'auto-mode-alist '("\\*md\\*\\'" . markdown-mode)))
 
