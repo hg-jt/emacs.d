@@ -53,7 +53,9 @@
         (json "https://github.com/tree-sitter/tree-sitter-json")
         (python "https://github.com/tree-sitter/tree-sitter-python")
         (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
-        (rust "https://github.com/tree-sitter/tree-sitter-rust") ))
+        (rust "https://github.com/tree-sitter/tree-sitter-rust" "v0.23.3")
+        (toml "https://github.com/tree-sitter/tree-sitter-toml")
+        (yaml "https://github.com/ikatyang/tree-sitter-yaml") ))
 
 
 (defvar my-packages
