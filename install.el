@@ -45,7 +45,7 @@
 ;; tree sitter languages
 ;; see https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
 (setq treesit-language-source-alist
-      '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+      '((bash "https://github.com/tree-sitter/tree-sitter-bash" "v0.23.3")
         (cmake "https://github.com/uyha/tree-sitter-cmake")
         (css "https://github.com/tree-sitter/tree-sitter-css")
         (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
@@ -66,6 +66,7 @@
     nginx-mode
     php-mode
     rust-mode
+    textile-mode
     web-mode
     yaml-mode
 

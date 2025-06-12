@@ -211,6 +211,10 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                         (lambda ()
                           (set-fill-column 80) )))
 
+            ;; configure textile-mode
+            (when (locate-library "textile-mode")
+              (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode)))
+
             ;; configure restclient-mode
             (when (locate-library "restclient")
               (add-to-list 'auto-mode-alist '("\\*web\\*\\'" . restclient-mode)))
