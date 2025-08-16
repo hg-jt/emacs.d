@@ -103,6 +103,8 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 ;; configure sh-mode
 (setq-default sh-basic-offset 2
               sh-indentation 2)
+(add-to-list
+ 'auto-mode-alist '("\\.env\\'" . sh-mode))         ; syntax highlighting for .env files
 
 
 ;; configure cc-mode
