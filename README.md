@@ -27,7 +27,8 @@ supported by the package manager the installation script can be omitted.
     that the *Emacs For Mac OS X* version of emacs is on your path before the
     older version that is bundled with the OS.
 
-        ln -s /Applications/Emacs.app/Contents/MacOS/Emacs /usr/local/bin/emacs
+        sudo mkdir -p /usr/local/bin
+        sudo ln -s /Applications/Emacs.app/Contents/MacOS/Emacs /usr/local/bin/emacs
 
     > *NOTE*: This script will launch the Emacs GUI when run from a terminal It
     > may also be useful to create an alias for running the Emacs CLI. To do
