@@ -34,3 +34,5 @@ To configure Eglot in Emacs 29 for Python development with Ruff:
    (add-to-list 'eglot-server-programs
                 '(python-ts-mode . ("path/to/.venv/bin/ruff" "server" "--preview")))
    ```
+
+[eglot]: https://www.gnu.org/software/emacs/manual/html_mono/eglot.html
