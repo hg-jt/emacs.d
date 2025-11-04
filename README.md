@@ -125,13 +125,21 @@ to be on the load-path). All local configuration should go in
 ;; use tree-sitter grammers
 (setq major-mode-remap-alist
       '((bash-mode . bash-ts-mode)
+        (c-mode . c-ts-mode)            ; separate mode
+        (c++-mode . c++-ts-mode)        ; separate mode
+        (conf-toml-mode . toml-ts-mode)
         (css-mode . css-ts-mode)
         (js-mode . js-ts-mode)
-        (json-mode . json-ts-mode)
+        (json-mode . json-ts-mode)      ; separate mode
         (python-mode . python-ts-mode)
         (ruby-mode . ruby-ts-mode)
-        ;(rust-mode . rust-ts-mode)
-   ))
+        (rust-mode . rust-ts-mode)
+        (sh-mode . bash-ts-mode)
+      ))
+
+(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
+(add-to-list 'auto-mode-alist '("Dockerfile.*\\'" . dockerfile-ts-mode))
+(add-to-list 'auto-mode-alist '(".coveragerc\\'" . conf-mode))
 ```
 
 ## Cookbook
