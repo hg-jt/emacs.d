@@ -51,7 +51,7 @@
         (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
         (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
         (json "https://github.com/tree-sitter/tree-sitter-json")
-        (python "https://github.com/tree-sitter/tree-sitter-python")
+        (python "https://github.com/tree-sitter/tree-sitter-python" "v0.23.6")
         (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
         (rust "https://github.com/tree-sitter/tree-sitter-rust" "v0.23.3")
         (toml "https://github.com/tree-sitter/tree-sitter-toml")
