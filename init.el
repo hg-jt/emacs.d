@@ -203,7 +203,8 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
               (add-hook 'markdown-mode-hook
                         (lambda ()
                           (set-fill-column 80)
-                          (setq-local compile-command (format "pd %s" (file-name-nondirectory (buffer-file-name))))))
+                          (setq compilation-window-height 10)
+                          (setq-local compile-command (format "pd -p %s" (file-name-nondirectory (buffer-file-name))))))
                           ;(turn-on-auto-fill)))
               (add-to-list 'auto-mode-alist '("\\*md\\*\\'" . markdown-mode)))
 
