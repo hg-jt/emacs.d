@@ -46,7 +46,9 @@
 ;; see https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
 (setq treesit-language-source-alist
       '((bash "https://github.com/tree-sitter/tree-sitter-bash" "v0.23.3")
+        (c "https://github.com/tree-sitter/tree-sitter-c")
         (cmake "https://github.com/uyha/tree-sitter-cmake")
+        (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
         (css "https://github.com/tree-sitter/tree-sitter-css")
         (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
         (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
