@@ -71,10 +71,10 @@ To configure Eglot in Emacs 29+ for editing Dockerfiles:
     npx docker-langserver $@
     ```
 
-
 2. Configure Eglot to use docker-langserver
 
    ```lisp
+   (add-to-list 'auto-mode-alist '("Dockerfile.*\\'" . dockerfile-ts-mode))
    (add-to-list 'eglot-server-programs
                 '(dockerfile-ts-mode . ("docker-langserver" "--stdio")))
    ```

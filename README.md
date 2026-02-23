@@ -99,8 +99,9 @@ to be on the load-path). All local configuration should go in
         split-width-threshold 140)
 
   ;; custom font
-  (set-face-attribute 'default nil :family "Source Code Pro")
-  (set-face-attribute 'default nil :height 140)
+  ;(set-face-attribute 'default nil :family "IBM Plex Mono" :height 160)
+  ;(set-face-attribute 'default nil :family "Monaspace Argon" :height 180 :weight 'light)
+  (set-face-attribute 'default nil :family "Source Code Pro" :height 160 :weight 'light)
 
   ;; set the theme
   (load-theme 'wombat t))
