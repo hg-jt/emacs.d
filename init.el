@@ -1,4 +1,6 @@
-;;; init.el --- Emacs configuration
+;;; init.el --- Emacs configuration.
+
+;;; Code:
 
 ;; UI
 (unless (and (eq system-type 'darwin) (window-system))
@@ -32,7 +34,6 @@
       default-tab-width 4                              ; set tab width to 4
       make-backup-files nil                            ; stop creating backup~ files
       compilation-scroll-output t                      ; scroll the compilation buffer
-      gc-cons-threshold 10000000                       ; increase threshold for running gc
       auto-window-vscroll nil                          ; potentially speed up line navigation
       dired-kill-when-opening-new-dired-buffer t       ; limit buffer useage in dired
       custom-file (concat user-emacs-directory
@@ -283,3 +284,4 @@ See http://manuel-uberti.github.io/emacs/2018/02/17/magit-bury-buffer/"
                                                 ("\\.coffee.erb\\'" . poly-coffee+erb-mode)
                                                 ("\\.html.erb\\'$" . poly-html+erb-mode))
                                               auto-mode-alist)))) ))
+;;; init.el ends here
