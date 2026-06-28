@@ -17,16 +17,6 @@
     (add-to-list 'load-path "~/.emacs.d/site-lisp"))
 
 
-;; configure reasonable certificate trust for Emacs on OS X.
-(if (and (eq system-type 'darwin)
-         (file-exists-p "/usr/local/etc/openssl/cert.pem"))
-    (eval-after-load "gnutls"
-      (lambda ()
-        ;; a brew installed openssl will include the cert.pem file in
-        ;; /usr/local/etc/openssl
-        (add-to-list 'gnutls-trustfiles "/usr/local/etc/openssl/cert.pem"))))
-
-
 (require 'package)
 (package-initialize t)
 
@@ -38,8 +28,8 @@
   ;; package repositories for modern emacsen
   (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                            ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-                           ("melpa" . "https://melpa.org/packages/")
-                           ("melpa-stable" . "https://stable.melpa.org/packages/"))))
+                           ("melpa-stable" . "https://stable.melpa.org/packages/")
+                           ("melpa" . "https://melpa.org/packages/") )))
 
 
 ;; tree sitter languages
@@ -117,11 +107,11 @@
 
 
 ;; install packges
-(dolist (p my-packages)
+(dolist (pkg my-packages)
   (condition-case nil
-      (package-install p)
+      (package-install pkg)
     (error
-     (message "WARNING: skipping %s" p))) )
+     (message "WARNING: skipping %s" pkg))) )
 
 
 ;; install language grammers
