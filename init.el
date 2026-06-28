@@ -26,7 +26,9 @@
                                'fundamental-mode
                              (let ((buffer-file-name (buffer-name)))
                                (set-auto-mode))))
-              sentence-end-double-space nil)           ; single space between sentences
+              sentence-end-double-space nil            ; single space between sentences
+              bidi-display-reordering 'left-to-right   ; assume left-to-right text
+              bidi-paragraph-direction 'left-to-right)
 
 
 ;; general configuration
@@ -36,6 +38,10 @@
       compilation-scroll-output t                      ; scroll the compilation buffer
       auto-window-vscroll nil                          ; potentially speed up line navigation
       dired-kill-when-opening-new-dired-buffer t       ; limit buffer useage in dired
+      bidi-inhibit-bpa t                               ; disable bidirectional parenthesis algorithm
+      help-window-select t                             ; automatically switch focus to help buffer
+      redisplay-skip-fontification-on-input t          ; defer fontification until typing is done
+      read-process-output-max (* 4 1024 1024)          ; max num bytes read from a subprocess per chunk
       custom-file (concat user-emacs-directory
                           "custom.el"))                ; isolate customizations
 
