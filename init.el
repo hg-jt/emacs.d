@@ -196,10 +196,19 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 (add-to-list 'auto-mode-alist '("\\.latex\\'" . latex-mode))
 
 
+;; utility functions
+(defun unfill-paragraph ()
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil)))
+
+
 ;; configure global key bindings
 (define-key global-map [f5] 'compile)                  ; compile
 (define-key global-map [f7] 'kill-compilation)         ; close compile frame
 (define-key global-map (kbd "C-c c") 'org-capture)     ; org-capture
+(define-key global-map (kbd "M-Q") 'unfill-paragraph)  ; unfill-paragraph
 
 
 ;; configure packages most likely installed through the package manager
