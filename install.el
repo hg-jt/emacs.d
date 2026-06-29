@@ -88,6 +88,7 @@
     flymake-ruff
     git-modes
     keycast
+    logview
     package-lint
     pip-requirements
     rainbow-mode

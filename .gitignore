@@ -8,6 +8,7 @@ bookmarks
 custom.el
 history
 games
+logview-cache*
 network-security.data
 org-persist
 tramp
