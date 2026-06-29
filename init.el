@@ -55,12 +55,6 @@
 (set-keyboard-coding-system 'utf-8)
 
 
-;; configure global key bindings
-(define-key global-map [f5] 'compile)                  ; compile
-(define-key global-map [f7] 'kill-compilation)         ; close compile frame
-(define-key global-map (kbd "C-c c") 'org-capture)     ; org-capture
-
-
 ;; configure OS X specific keybindings
 (when (eq system-type 'darwin)
   ;; works around terminal issues w/properly sending meta in OSX
@@ -202,6 +196,12 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 (add-to-list 'auto-mode-alist '("\\.latex\\'" . latex-mode))
 
 
+;; configure global key bindings
+(define-key global-map [f5] 'compile)                  ; compile
+(define-key global-map [f7] 'kill-compilation)         ; close compile frame
+(define-key global-map (kbd "C-c c") 'org-capture)     ; org-capture
+
+
 ;; configure packages most likely installed through the package manager
 (add-hook 'after-init-hook
           (lambda ()
@@ -217,6 +217,7 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                           ;(turn-on-auto-fill)))
               (add-to-list 'auto-mode-alist '("\\*md\\*\\'" . markdown-mode)))
 
+
             ;; configure rst-mode
             (when (locate-library "rst")
               (add-hook 'rst-mode-hook
@@ -231,7 +232,6 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
             (when (locate-library "restclient")
               (add-to-list 'auto-mode-alist '("\\*web\\*\\'" . restclient-mode)))
 
-
             ;; configure web-mode
             (when (locate-library "web-mode")
               (setq-default web-mode-markup-indent-offset 2)
@@ -241,7 +241,6 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                                               ("\\.jsp\\'" . web-mode)
                                               ("\\.jinja\\'" . web-mode))
                                             auto-mode-alist)))
-
 
             ;; configure inferior-js-mode
             (when (locate-library "js-comint")
@@ -259,7 +258,6 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
                 (define-key js-mode-map (kbd "C-c l") 'js-load-file-and-go))
 
               (add-hook 'inferior-js-mode-hook 'inferior-js-keybindings))
-
 
             ;; configure magit
             (when (locate-library "magit")
@@ -289,5 +287,5 @@ See http://manuel-uberti.github.io/emacs/2018/02/17/magit-bury-buffer/"
                 (setq auto-mode-alist (append '(("\\.js.erb\\'" . poly-js+erb-mode)
                                                 ("\\.coffee.erb\\'" . poly-coffee+erb-mode)
                                                 ("\\.html.erb\\'$" . poly-html+erb-mode))
-                                              auto-mode-alist)))) ))
+                                              auto-mode-alist))))
 ;;; init.el ends here
