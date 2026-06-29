@@ -212,8 +212,8 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
 (define-key global-map [f5] 'compile)                  ; compile
 (define-key global-map [f7] 'kill-compilation)         ; close compile frame
 (define-key global-map (kbd "C-c c") 'org-capture)     ; org-capture
+(define-key global-map (kbd "C-c C-z") 'uuid-insert)   ; insert a uuid
 (define-key global-map (kbd "M-Q") 'unfill-paragraph)  ; unfill-paragraph
-
 
 ;; configure packages most likely installed through the package manager
 (add-hook 'after-init-hook
@@ -295,4 +295,24 @@ See http://manuel-uberti.github.io/emacs/2018/02/17/magit-bury-buffer/"
                                                 ("\\.coffee.erb\\'" . poly-coffee+erb-mode)
                                                 ("\\.html.erb\\'$" . poly-html+erb-mode))
                                               auto-mode-alist))))
+
+            ;; configure toml-ts-mode
+            (add-hook 'toml-ts-mode-hook
+                      (lambda ()
+                        (setq-local indent-tabs-mode nil)
+                        (setq-local tab-width 4)
+                        (setq-local standard-indent 4)
+                        (setq-local toml-ts-mode-indent-offset 4)))
+
+            ;; misc utility functions
+            (when (locate-library "uuid")
+              (defun uuid-insert()
+                "Insert a UUID at point."
+                (interactive)
+                (require 'uuid)
+                (insert (uuid-string)))
+              )
+            ))  ;; end of external package configuration
+
+(message "Emacs started in %s" (emacs-init-time))
 ;;; init.el ends here
