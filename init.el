@@ -101,6 +101,10 @@ ex: (add-to-list 'load-path \"~/.emacs.d/site-lisp\")
     `(eval-after-load ,file (lambda () ,@body))))
 
 
+;; configure isearch
+(setq isearch-allow-motion t)                       ; navigate isearch matches
+
+
 ;; configure sh-mode
 (setq-default sh-basic-offset 2
               sh-indentation 2)
