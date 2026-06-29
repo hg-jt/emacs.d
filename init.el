@@ -287,12 +287,6 @@ See http://manuel-uberti.github.io/emacs/2018/02/17/magit-bury-buffer/"
                     (mapc #'kill-buffer buffers)))
                 (define-key magit-status-mode-map (kbd "q") #'magit-kill-buffers)))
 
-
-            ;; configure scala-mode
-            (when (and (locate-library "scala-mode") (>= emacs-major-version 24))
-              (add-hook 'scala-mode-hook 'electric-pair-mode))
-
-
             ;; configure polymodes
             (when (locate-library "polymode")
               ;; poly-erb
